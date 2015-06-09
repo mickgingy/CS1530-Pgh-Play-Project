@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Test Add Function</title>
+    <title>Test Functions</title>
  
     <script type="text/javascript" src="junit/jsUnitCore.js"></script>
     <script type="text/javascript" src=""></script> /* source code to test goes here */
