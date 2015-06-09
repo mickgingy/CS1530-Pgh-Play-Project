@@ -1,0 +1,16 @@
+Setting up PhoneGap
+
+1. Install node.js
+2. add ;C:\Program Files\nodejs\ to USER classpath (on windows at least)
+3. on command line, enter 'npm install -g phonegap'
+4. Download PhoneGap desktop app
+5. Download PhoneGap developer app (on mobile device)
+
+
+As long as mobile device is on the same network as the desktop, you can debug/view the app 
+on the mobile device. It is actually a pretty nice tool. The desktop app acts as a server for the mobile application.
+Every time a change is made to the source code it will update real-time on the mobile app
+ without having to build or restart anything.
+
+There is a chrome extension that will allow users to debug in the browser. It is called Ripple. I have
+downloaded it but not tried it yet.
