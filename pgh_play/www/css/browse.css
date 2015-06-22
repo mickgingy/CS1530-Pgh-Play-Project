@@ -54,8 +54,65 @@
 	font-size: 150%;
 	font-weight: bold;
 	position: absolute;
-	top: 110px;
+	top: 108px;
 	left: 70px;
+}
+
+#find_button {
+	background-color: #D3D3D3;
+	height: 47px;
+	width: 225px;
+	position: absolute;
+	top: 261px;
+	left: 93px;
+	z-index: 1;
+}
+
+#find_butt_text {
+	font-family: 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
+	font-size: 125%;
+	font-weight: bold;
+	position: absolute;
+	top: 273px;
+	left: 143px;
+	z-index: 1;
+}
+
+#find_zip_text {
+	font-family: 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
+	font-size: 125%;
+	position: absolute;
+	top: 324px;
+	left: 85px;
+	color: white;
+}
+
+#find_zip {
+	position: absolute;
+	font-size: 130%;
+	top: 325px;
+	left: 239px;
+	color: blue;
+	z-index: 1;
+}
+
+#find_zip_bg {
+	position: absolute;
+	top: 325px;
+	left: 235px;
+	background-color: white;
+	height: 24px;
+	width: 60px;
+}
+
+#find_zip_icon {
+	position: absolute;
+	top: 325px;
+	left: 305px;
+	background-color: #D3D3D3;
+	height: 24px;
+	width: 20px;
+	z-index: 1;
 }
 
 #browse_text {
@@ -63,9 +120,28 @@
 	font-size: 150%;
 	font-weight: bold;
 	position: absolute;
-	top: 430px;
+	top: 410px;
 	left: 90px;
-	color: black;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#location_icon {
+	position: absolute;
+	left: 110px;
+	top: 270px;
+	width: 22px;
+	height: 22px;
+	z-index: 1;
+}
+	
+#forward {
+	position: absolute;
+	left: 305px;
+	top: 328px;
+	width: 20px;
+	height: 20px;
+	z-index: 1;
 }
 
 .grayscale {
