@@ -1,6 +1,22 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/nearyou.css"/>
+		<script src="http://maps.googleapis.com/maps/api/js"></script>
+		<script>
+
+function initialize() {
+	var mapCanvas = document.getElementById("googleMap");
+	var mapOptions = {
+		center: new google.maps.LatLng(40.4397, -79.9764),
+		zoom: 12,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+	var map = new google.maps.Map(mapCanvas, mapOptions);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+		</script>
 	</head>
 	<body>
 		<div id="header">
@@ -11,12 +27,8 @@
 		</div>
 		<div id="near_you"></div>
 		<p id="nearyou_text">NEAR YOU</p>
-		<div id="map">
-			
-		</div>
-		
+		<div id="googleMap"></div>
 		<div id="list">
-			
 		</div>
 	</body>
 </html>

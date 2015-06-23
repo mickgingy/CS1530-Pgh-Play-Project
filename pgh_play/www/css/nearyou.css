@@ -59,6 +59,13 @@
 	color: white;
 }
 
+#googleMap {
+	width: 400px;
+	height: 300px;
+}
+
 #list {
 	overflow: hidden;
+	width: 400px;
+	height: 300px;
 }
