@@ -65,7 +65,18 @@
 }
 
 #list {
-	overflow: hidden;
+	overflow: scroll;
 	width: 400px;
 	height: 300px;
+}
+
+#list ul { 
+	list-style: none;
+	padding-left: 0;
+}
+
+#list li {
+	border: 1px solid black;
+	overflow: scroll;
+	background-color: lightgray;
 }
