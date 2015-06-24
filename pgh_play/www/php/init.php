@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <title>CS1520 Project 2</title>
+  <title>Pgh Play DB INIT Script</title>
  </head>
  <body>
  <?php
