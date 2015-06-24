@@ -14,7 +14,7 @@ session_start();
 		if ($result->num_rows ==1)
 		{
 			$_SESSION['user'] = $_POST['username'];
-			echo "Welcome back $_SESSION[user]!";
+			header('Location: http://localhost:8666/browse.html');
 		}
 		else
 		{
