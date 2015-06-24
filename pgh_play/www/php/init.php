@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
  <head>
+<<<<<<< HEAD:pgh_play/www/init.php
   <title>init</title>
+=======
+  <title>Pgh Play DB INIT Script</title>
+>>>>>>> 8b525d33885deeefe86359fe3a47395281fe8a3e:pgh_play/www/php/init.php
  </head>
  <body>
  <?php
