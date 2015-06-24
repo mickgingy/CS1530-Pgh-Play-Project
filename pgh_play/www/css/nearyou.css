@@ -66,6 +66,7 @@
 
 #list {
 	overflow: hidden;
+	overflow-y: scroll;
 	width: 400px;
 	height: 300px;
 }
