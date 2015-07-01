@@ -13,7 +13,7 @@ $(document).ready(function(){
 			// if passwords match
 			if (pw.localeCompare(confirm) == 0) {
 					// check if username already exists
-					$.post('pghnewuser.php',{username:username, email:email}, function(data){
+					$.post('pghnewuser.php',{username:username, email:email, pw:pw, confirm:confirm}, function(data){
 							var exists = data;
 							if (exists.localeCompare("exists") == 0){
 									alert("username or email already exists, please re-enter");
