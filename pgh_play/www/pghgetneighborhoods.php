@@ -1,6 +1,6 @@
 <?php
 include 'interface.php';
-# User login PGH_Play
+# Get list of neighborhoods
 session_start();
-login();
+get_neighborhoods();
 ?>
