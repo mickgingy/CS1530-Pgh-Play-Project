@@ -1,6 +1,7 @@
 #container {
 	height: 660;
 	width: 370;
+	position: relative;
 }
 
 #header {
@@ -64,12 +65,13 @@
 	background-color: #0E6F48;
 	height: 5%;
 	width: 100%;
+	position: relative;
 }
 
 #nearyou_text {
 	position: absolute;
-	top: 7.5%;
-	left: 3.5%;
+	top: 7%;
+	left: 3%;
 	font-size: 120%;
 	font-weight: bold;
 	color: white;

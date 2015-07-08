@@ -1,54 +1,74 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+/**
+ *	function sendZip()
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *	Sends user's inputted zip code to the nearyou.html page.
+ *	This allows the user to view a specified zip code in a Google Map.
+ */			
+function sendZip() {
+	// First we receive the zip code from the #find_zip div
+	var zipcode = document.getElementById('find_zip').innerHTML;
+	
+	// Then we create a 'form' using it and have the action be a link to the map page
+    var form = document.createElement("form");
+	form.setAttribute("name", "submit_zip")
+    form.setAttribute("method", "link");
+    form.setAttribute("action", "nearyou.html");
+   
+    // Then we create a hidden 'input' to attach to the form in order to give it the zip code
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "zipcode");
+    input.setAttribute("value", zipcode);
+	
+	// Then we add the input to the form
+    form.appendChild(input);
+			
+	// Finally we append the form to the page and 'submit' it, linking us to the nearyou.html page
+    document.body.appendChild(form);
+    form.submit();
+}
+
+/**
+ *	function sendLocation()
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ *	Sends user's current location to the nearyou.html page.
+ * 	This allows the user to view their current area in a Google Map.
  */
- 
- function testA(){
-	 return true;
- }
- 
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+function sendLocation() {
+	// We create a 'form' using it and have the action be a link to the map page
+    var form = document.createElement("form");
+	form.setAttribute("name", "submit_zip")
+    form.setAttribute("method", "link");
+    form.setAttribute("action", "nearyou.html");
+   
+    // Then we create a hidden 'input' to attach to the form in order to tell it to find the location
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "location");
+    input.setAttribute("value", "somedata");
+	
+	// Then we add the input to the form
+    form.appendChild(input);
+			
+	// Finally we append the form to the page and 'submit' it, linking us to the nearyou.html page
+    document.body.appendChild(form);
+    form.submit();
+}
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+/**
+ *	function addPlayground()
+ *
+ *	Under Construction
+ */
+function addPlayground() {
+	alert("Plus");
+}
 
-        console.log('Received Event: ' + id);
-    }
-};
+/**
+ *	function userMenu()
+ *
+ *	Under Construction
+ */
+function userMenu() {
+	alert("Menu");
+}
