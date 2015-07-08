@@ -88,6 +88,7 @@
 		
 		//If the get_parks() function properly works, a non-null variable (nested array) should be returned.
 		public function testGetParksNotNull(){
+			$_GET['zip'] = 99999;
 			$this->assertNotNull(get_parks());
 		}
 		
