@@ -57,6 +57,7 @@
 		//If the get_parks() function properly works, a non-empty $& delimited list will be echo-ed.
 		public function testGetParksDelim(){
 			ob_start();
+			$_GET['zip'] = 15061;
 			get_parks();
 			$output = ob_get_contents();
 			ob_end_clean();
@@ -70,6 +71,7 @@
 			global $delim_output;
 			$delim_output = false;
 			ob_start();
+			$_GET['zip'] = 15061;
 			get_parks();
 			$output = ob_get_contents();
 			ob_end_clean();
@@ -78,8 +80,15 @@
 			assertNotNull($output);
 		}
 		
+		//Test to ensure that the get_parks() function works with non-numeric input
+		public function testGetParksNonNumericInput(){
+			$_GET['zip'] = 'THISISNOTNUMERIC';
+			assertNotNull(get_parks());
+		}
+		
 		//If the get_parks() function properly works, a non-null variable (nested array) should be returned.
 		public function testGetParksNotNull(){
+			$_GET['zip'] = 99999;
 			$this->assertNotNull(get_parks());
 		}
 		

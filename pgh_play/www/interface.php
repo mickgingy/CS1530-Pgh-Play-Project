@@ -52,7 +52,7 @@ function create_new() {
 		echo "dne"; // User does not exist
 		$pass = hash('sha256', rtrim($_POST["pw"]));
 		// hash password and enter new user into DB
-		$query = "INSERT INTO users (user, password, email) VALUES  ('$_POST[username]', '$pass', '$_POST[email]')";
+		$query = "INSERT INTO users (user, password, email) VALUES  ('{$_POST[username]}', '$pass', '{$_POST[email]}')";
 		$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 		return true;
 	endif;
@@ -71,7 +71,7 @@ function login() {
 	connect();
 	$pass = hash('sha256', rtrim($_POST["pw"]));
 	// verify username and password match
-	$query = "SELECT * FROM users  WHERE user='$_POST[username]' && password='$pass'";
+	$query = "SELECT * FROM users  WHERE user='{$_POST[username]}' && password='$pass'";
 	$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 	$pws = $result->fetch_all(MYSQLI_ASSOC);
 	if ($result->num_rows ==1)
