@@ -1,153 +1,160 @@
+#container {
+	height: 660;
+	width: 370;
+}
+
 #header {
-	background-color: gray;
-	height: 60px;
-	width: 400px;
+	background-color: #178553;
+	height: 9%;
+	width: 100%;
 	color: white;
-	align: left;
 }
 
-#find {
-	background-image: url(../img/park2.jpg);
-	width: 400px;
-	height: 300px;
-	align: center;
-	background-size: cover;
-}
-
-#browse {
-	background-image: url(../img/park1.jpg);
-	width: 400px;
-	height: 300px;
-	align: center;
-	background-size: cover;
+#header>div {
+	display: inline-block;
+	vertical-align: middle;
+	overflow: visible;
 }
 
 #title {
-	position: absolute;
-	left: 28px;
-	top: 8px;
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 120%;
 	font-weight: bold;
 }
 
-#plus {
-	position: absolute;
-	left: 325px;
-	top: 29px;
-	width: 20px;
-	height: 20px;
-	vertical-align: middle;
+.left {
+	width: 60%;
+	padding-left: 5%;
+}
+.right {
+	width: 29%;
+	padding-right: 2%;
 }
 
-#menu {
-	position: absolute;
-	left: 365px;
-	top: 29px;
-	width: 20px;
-	height: 20px;
-	vertical-align: middle;
+.l {
+	float: left;
+}
+
+.r {
+	float: right;
+}
+
+#plus {
+	font-size: 22;
+	margin-left: -20%;
+}
+
+#bars {
+	font-size: 22;
+	margin-left: 20%;
+}
+
+#find {
+	background-image: url(../img/park2.jpg);
+	background-size: cover;
+	height: 50%;
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	align: center;
 }
 
 #find_text {
-	font-family: 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
 	font-size: 150%;
 	font-weight: bold;
-	position: absolute;
-	top: 108px;
-	left: 70px;
+	padding-top: 10%;
 }
 
 #find_button {
-	background-color: #D3D3D3;
-	height: 47px;
-	width: 225px;
+	background-color: #5CB056;
+	height: 7%;
+	width: 32%;
 	position: absolute;
-	top: 261px;
-	left: 93px;
+	top: 40%;
+	left: 10%;
 	z-index: 1;
 }
 
 #find_butt_text {
-	font-family: 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
-	font-size: 125%;
+	font-size: 135%;
 	font-weight: bold;
+	z-index: 1;
 	position: absolute;
-	top: 273px;
-	left: 143px;
+	top: 41.5%;
+	left: 16%;
+}
+
+#location_icon {
+	position: absolute;
+	font-size: 20;
+	top: 41%;
+	left: 12%;
 	z-index: 1;
 }
 
+/*.c {
+	display: inline-block;
+	vertical-align: middle;
+	overflow: visible;
+}*/
+
 #find_zip_text {
-	font-family: 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
 	font-size: 125%;
-	position: absolute;
-	top: 324px;
-	left: 85px;
 	color: white;
+	position: absolute;
+	top: 50%;
+	left: 8.5%;
 }
 
 #find_zip {
 	position: absolute;
 	font-size: 130%;
-	top: 325px;
-	left: 239px;
-	color: blue;
+	top: 50%;
+	left: 32%;
 	z-index: 1;
 }
 
 #find_zip_bg {
 	position: absolute;
-	top: 325px;
-	left: 235px;
+	top: 50%;
+	left: 31.5%;
 	background-color: white;
-	height: 24px;
-	width: 60px;
+	height: 3.5%;
+	width: 8.5%;
 }
 
 #find_zip_icon {
 	position: absolute;
-	top: 325px;
-	left: 305px;
-	background-color: #D3D3D3;
-	height: 24px;
-	width: 20px;
-	z-index: 1;
-}
-
-#browse_text {
-	font-family: 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
-	font-size: 150%;
-	font-weight: bold;
-	position: absolute;
-	top: 410px;
-	left: 90px;
-	color: white;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-#location_icon {
-	position: absolute;
-	left: 110px;
-	top: 270px;
-	width: 22px;
-	height: 22px;
+	top: 50%;
+	left: 41%;
+	background-color: #5CB056;
+	height: 3.5%;
+	width: 2.5%;
 	z-index: 1;
 }
 	
 #forward {
 	position: absolute;
-	left: 305px;
-	top: 328px;
-	width: 20px;
-	height: 20px;
+	top: 50.5%;
+	left: 41.5%;
+	font-size: 20;
 	z-index: 1;
 }
 
-.grayscale {
-         -moz-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
-         -o-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
-         -webkit-filter: grayscale(100%);
-         filter: gray;
-         filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+#browse {
+	background-image: url(../img/park1.jpg);
+	height: 41%;
+	width: 100%;
+	background-size: cover;
+	margin: auto;
+	text-align: center;
+	align: center;
+}
+
+#browse_text {
+	font-size: 150%;
+	font-weight: bold;
+	padding-top: 10%;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

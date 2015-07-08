@@ -1,26 +1,101 @@
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/browse.css"/>
+		<link rel="stylesheet" type="text/css" href="css/browse.css">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Karla">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<script src="http://code.jquery.com/jquery-latest.js">//Imports the JQuery Library</script>
+		<script>
+	
+/**
+ *	function sendZip()
+ *
+ *	Sends user's inputted zip code to the nearyou.html page.
+ *	This allows the user to view a specified zip code in a Google Map.
+ */			
+function sendZip() {
+	// First we receive the zip code from the #find_zip div
+	var zipcode = document.getElementById('find_zip').innerHTML;
+	
+	// Then we create a 'form' using it and have the action be a link to the map page
+    var form = document.createElement("form");
+	form.setAttribute("name", "submit_zip")
+    form.setAttribute("method", "link");
+    form.setAttribute("action", "nearyou.html");
+   
+    // Then we create a hidden 'input' to attach to the form in order to give it the zip code
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "zipcode");
+    input.setAttribute("value", zipcode);
+	
+	// Then we add the input to the form
+    form.appendChild(input);
+			
+	// Finally we append the form to the page and 'submit' it, linking us to the nearyou.html page
+    document.body.appendChild(form);
+    form.submit();
+}
+
+/**
+ *	function sendLocation()
+ *
+ *	Sends user's current location to the nearyou.html page.
+ * 	This allows the user to view their current area in a Google Map.
+ */
+function sendLocation() {
+	// We create a 'form' using it and have the action be a link to the map page
+    var form = document.createElement("form");
+	form.setAttribute("name", "submit_zip")
+    form.setAttribute("method", "link");
+    form.setAttribute("action", "nearyou.html");
+   
+    // Then we create a hidden 'input' to attach to the form in order to tell it to find the location
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "location");
+    input.setAttribute("value", "somedata");
+	
+	// Then we add the input to the form
+    form.appendChild(input);
+			
+	// Finally we append the form to the page and 'submit' it, linking us to the nearyou.html page
+    document.body.appendChild(form);
+    form.submit();
+}
+		
+		</script>
 	</head>
 	<body>
-		<div id="header">
-			<p id="title">PGH PLAY PROJECT</p>
-			<img src="img/plus2.png" id="plus"/>
-			<img src="img/menu.png" id="menu"/>
-		</div>
-		<div id="find" class="grayscale">
-			<div id="find_text">Find a playground near you</div>
-			<div id="find_button"></div>
-			<div id="find_butt_text">Find your location</div>
-			<div id="find_zip_text">Or enter your zip:</div>
-			<div id="find_zip" contenteditable="true">15555</div>
-			<div id="find_zip_bg"></div>
-			<div id="find_zip_icon"></div>
-			<img src="img/gps.png" id="location_icon"/>
-			<img src="img/forward.png" id="forward"/>
-		</div>
-		<div id="browse" class="grayscale">
-			<div id="browse_text">Browse neighborhoods</div>
+		<div id="container">
+			<div id="header">
+				<div class="left">
+					<div class="l">
+						<p id="title">PGH PLAY PROJECT</p>
+					</div>
+				</div>
+				<div class="right">
+					<div class="r">
+						<i class="fa fa-plus" id="plus"></i>
+						<i class="fa fa-bars" id="bars"></i>
+					</div>
+				</div>
+			</div>
+			<div id="find">
+				<div id="find_text" style="font-family: Karla">Find a playground near you</div>
+				<div id="find_button" onclick="sendLocation()"></div>
+				<div id="find_butt_text" style="font-family: Karla" onclick="sendLocation()">Find your location</div>
+				<i class="fa fa-location-arrow" id="location_icon"></i>
+				<div class="c">
+					<div id="find_zip_text" style="font-family: Karla">Or enter your zip:</div>
+					<div id="find_zip" contenteditable="true">15213</div>
+					<div id="find_zip_bg"></div>
+					<div id="find_zip_icon" onclick="sendZip()"></div>
+					<i class="fa fa-chevron-right" id="forward" onclick="sendZip()"></i>
+				</div>
+			</div>
+			<div id="browse">
+				<div id="browse_text" style="font-family: Karla">Browse neighborhoods</div>
+			</div>
 		</div>
 	</body>
 </html>

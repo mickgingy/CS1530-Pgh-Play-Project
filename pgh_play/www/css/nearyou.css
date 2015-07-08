@@ -1,73 +1,89 @@
+#container {
+	height: 660;
+	width: 370;
+}
+
 #header {
-	background-color: gray;
-	height: 60px;
-	width: 400px;
+	background-color: #178553;
+	height: 9%;
+	width: 100%;
 	color: white;
-	align: left;
+}
+
+#header>div {
+	display: inline-block;
+	vertical-align: middle;
+	overflow: visible;
 }
 
 #backward {
-	position: absolute;
-	vertical-align: middle;
-	top: 29px;
-	left: 22px;
-	width: 20px;
-	height: 20px;
+	font-size: 22;
+	padding-top: 125%;
 }
 
 #title {
-	position: absolute;
-	left: 50px;
-	top: 8px;
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 120%;
 	font-weight: bold;
+	padding-left: 4%;
+}
+
+.left {
+	width: 76%;
+	padding-left: 5%;
+}
+
+.right {
+	width: 12%;
+	padding-right: 2%;
+}
+
+.l1 {
+	float: left;
+}
+
+.l2 { 
+	float: left;
+}
+
+.r {
+	float: right;
 }
 
 #plus {
-	position: absolute;
-	left: 325px;
-	top: 29px;
-	width: 20px;
-	height: 20px;
-	vertical-align: middle;
+	font-size: 22;
+	margin-left: -20%;
 }
 
-#menu {
-	position: absolute;
-	left: 365px;
-	top: 29px;
-	width: 20px;
-	height: 20px;
-	vertical-align: middle;
+#bars {
+	font-size: 22;
+	margin-left: 20%;
 }
 
 #near_you {
-	background-color: lightgray;
-	height: 40px;
-	width: 400px;
-	align: left;
+	background-color: #0E6F48;
+	height: 5%;
+	width: 100%;
 }
 
 #nearyou_text {
 	position: absolute;
-	left: 22px;
-	top: 57px;
-	font-family: Verdana, Geneva, sans-serif;
+	top: 7.5%;
+	left: 3.5%;
 	font-size: 120%;
 	font-weight: bold;
 	color: white;
 }
 
 #googleMap {
-	width: 400px;
-	height: 300px;
+	height: 43%;
+	width: 100%;
 }
 
 #list {
 	overflow: scroll;
-	width: 400px;
-	height: 300px;
+	height: 43%;
+	width: 100%;
 }
 
 #list ul { 
