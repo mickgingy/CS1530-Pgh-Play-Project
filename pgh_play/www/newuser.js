@@ -10,10 +10,11 @@ $(document).ready(function(){
 			var confirm = $('#confirm').val();
 			var username = $('#username').val();
 			var email = $('#email').val();
+			var name = $('#name').val();
 			// if passwords match
 			if (pw.localeCompare(confirm) == 0) {
 					// check if username already exists
-					$.post('pghnewuser.php',{username:username, email:email, pw:pw, confirm:confirm}, function(data){
+					$.post('pghnewuser.php',{username:username, email:email, name:name, pw:pw, confirm:confirm}, function(data){
 							var exists = data;
 							if (exists.localeCompare("exists") == 0){
 									alert("username or email already exists, please re-enter");
@@ -21,6 +22,7 @@ $(document).ready(function(){
 									$('#confirm').val("");
 									$('#email').val("");
 									$('#username').val("");
+									$('#name').val("");
 							}
 							else {
 									alert("Welcome to Pittsburgh Play!");
@@ -33,6 +35,7 @@ $(document).ready(function(){
 				$('#confirm').val("");
 				$('#email').val("");
 				$('#username').val("");
+				$('#name').val("");
 			}
 	 });
 

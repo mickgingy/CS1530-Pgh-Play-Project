@@ -29,6 +29,7 @@ function connect(){
 		POST : username
 		POST : email
 		POST : pw
+		POST : name
 	Returns:
 		true : user successfully created
 		false : user not created
@@ -36,12 +37,12 @@ function connect(){
 function create_new() {
 	global $db;
 	connect();
-	$query = "SELECT user from users WHERE user = '{$_POST[username]}'";
+	$query = "SELECT user from users WHERE user = '{$_POST['username']}'";
 	$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 	$user = $result->fetch_array();
 	
 	#check if email already exists
-	$query = "SELECT email from users WHERE email = '{$_POST[email]}'";
+	$query = "SELECT email from users WHERE email = '{$_POST['email']}'";
 	$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 	$email = $result->fetch_array();
 	//Check the count of items to see if this user has already been created or not
@@ -49,11 +50,12 @@ function create_new() {
 		echo "exists"; // if email or username already exist, user must re-enter new information
 		return false;
 	else:
-		echo "dne"; // User does not exist
+		//echo "dne"; // User does not exist
 		$pass = hash('sha256', rtrim($_POST["pw"]));
 		// hash password and enter new user into DB
-		$query = "INSERT INTO users (user, password, email) VALUES  ('{$_POST[username]}', '$pass', '{$_POST[email]}')";
+		$query = "INSERT INTO users (user, name, password, email) VALUES  ('{$_POST['username']}', '{$_POST['name']}', '$pass', '{$_POST['email']}')";
 		$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
+		echo $result;
 		return true;
 	endif;
 	return false;
@@ -71,7 +73,7 @@ function login() {
 	connect();
 	$pass = hash('sha256', rtrim($_POST["pw"]));
 	// verify username and password match
-	$query = "SELECT * FROM users  WHERE user='{$_POST[username]}' && password='$pass'";
+	$query = "SELECT * FROM users  WHERE user='{$_POST['username']}' && password='$pass'";
 	$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 	$pws = $result->fetch_all(MYSQLI_ASSOC);
 	if ($result->num_rows ==1)
@@ -200,6 +202,73 @@ function get_parks(){
 	echo $output;
 	return $results;
 }
+
+// enter new park into the db via new park form
+// this will store the following info in the db: Park name, address, rating, ages, comments
+//  all of these inputs are received by the new park form a user fills out
+// *****facilities and pictures still need to be implemented 
+function new_park(){
+	global $db;
+	connect();
+	$park_id = 0;
+	
+	
+	// if name of park is entered, allow user to store name, address, and zip code of the new park
+	if(isset($_POST['name'])){
+		// set neighborhood if user chooses to
+		if(isset($_POST['neighborhood'])){
+			$query = "INSERT INTO parks (name, address, zip_code, neighborhood) VALUES  ('{$_POST['name']}', '{$_POST['address']}', '{$_POST['zip']}', '{$_POST['neighborhood']}')";
+			$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
+		}
+		else{
+			$query = "INSERT INTO parks (name, address, zip_code) VALUES  ('{$_POST['name']}', '{$_POST['address']}', '{$_POST['zip']}')";
+			$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
+		}
+		echo "Thanks!";
+	}
+	else{
+		echo false;
+	}
+	// get park id variable from park table to correctly link the park to its attributes, ratings, comments, etc. (link  parks to other tables in db)
+		$query = "SELECT park_id FROM parks WHERE name='{$_POST['name']}'";
+		$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
+		$temp=$result->fetch_assoc();
+	
+	// store rating if set
+	if(isset($_POST['rating'])){
+		$query = "INSERT INTO ratings (park_id, rating) VALUES ('{$temp['park_id']}', '{$_POST['rating']}')";
+		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
+	}
+	
+
+	// store comment if set
+	if(isset($_POST['comment'])){
+		$query = "INSERT INTO comments (park_id, comment) VALUES ('{$temp['park_id']}', '{$_POST['comment']}')";
+		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
+	}
+	// store info about appropriate age groups for park if set
+	if (strcmp($_POST['infants'],"yes") == 0){
+		$query = "INSERT INTO ages (park_id, infants) VALUES ('{$temp['park_id']}', '{$_POST['infants']}')";
+		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
+	}
+	if (strcmp($_POST['toddlers'],"yes") == 0){
+		$query = "INSERT INTO ages (park_id, toddlers) VALUES ('{$temp['park_id']}', '{$_POST['toddlers']}')";
+		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
+	}
+	if (strcmp($_POST['five_eight'],"yes") == 0){
+		$query = "INSERT INTO ages (park_id, five) VALUES ('{$temp['park_id']}', '{$_POST['five_eight']}')";
+		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
+	}
+	if (strcmp($_POST['nine_twelve'],"yes") == 0){
+		$query = "INSERT INTO ages (park_id, nine) VALUES ('{$temp['park_id']}', '{$_POST['nine_twelve']}')";
+		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
+	}
+	#NOTE: You'll notice that the ages table is kinda wonky because this inserts a row for every checked box for the ages... This may need fixed/refactored depending on how we handle it with the client-side
+
+
+	
+}
+
 
 
 ?>
