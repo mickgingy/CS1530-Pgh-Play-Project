@@ -1,129 +1,55 @@
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/nearyou.css"/>
-		<script src="http://maps.googleapis.com/maps/api/js"></script>
-		<script>
-
-function initialize() {
-	var mapCanvas = document.getElementById("googleMap");
-	var mapOptions = {
-		center: new google.maps.LatLng(40.4397, -79.9764),
-		zoom: 12,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	}
-	map = new google.maps.Map(mapCanvas, mapOptions);
-	
-	map.set('styles', [
-		{
-			featureType: 'road',
-			elementType: 'geometry',
-			stylers: [
-				{ color: '#000000' },
-				{ weight: 0.1 }
-			]
-		},
-	/*
-		{
-			featureType: 'road',
-			elementType: 'labels',
-			stylers: [
-				{ saturation: -100 },
-				{ invert_lightness: true}
-			]
-		},
-	
-		{
-			featureType: 'landscape',
-			elementType: 'geometry',
-			stylers: [
-				{ hue: '#3333FF' },
-				{ gamma: 1.4 },
-				{ saturation: 0 },
-				{ lightness: 100 } 
-			]
-		},
-	
-		{
-			featureType: 'poi',
-			elementType: 'geometry',
-			stylers: [
-				{ hue: '#501963' },
-				{ lightness: -15 },
-				{ saturation: 50 }
-			]
-		},
-	*/
-		{
-			featureType: 'poi.park',
-			elementType: 'geometry',
-			stylers: [
-				{ hue: '#4DFF4D' },
-				{ lightness: -5 },
-				{ saturation: 99 }
-			]
-		}
-	]);
-	
-	//var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-	var marker = new google.maps.Marker({
-		position: new google.maps.LatLng(40.43473, -79.94318),
-		map: map,
-		icon: 'img/plus2.png'
-	});
-}
-
-function addMarker(feature) {
-	var marker = new google.maps.Marker({
-		position: feature.position,
-		icon: icons[feature.type].icon,
-		map: map
-	})
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-window.onload = function() {
-	/**
-	 *  TODO:
-	 *	Get AJAX return value from PHP DB — all nearby parks of user-
-	 *	inputted location. Then dynamically add each park to #park_list
-	 */
-}
-
-		</script>
+		<link rel="stylesheet" type="text/css" href="css/nearyou.css">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Karla">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<script src="http://maps.googleapis.com/maps/api/js">//Imports the Google Maps API</script>
+		<script src="js/nearyou.js">//Imports custom JavaScript for this page</script>
 	</head>
 	<body>
-		<div id="header">
-			<img src="img/backward_white.png" id="backward"/>
-			<p id="title">PGH PLAY PROJECT</p>
-			<img src="img/plus2.png" id="plus"/>
-			<img src="img/menu.png" id="menu"/>
-		</div>
-		<div id="near_you"></div>
-		<p id="nearyou_text">NEAR YOU</p>
-		<div id="googleMap"></div>
-		<div id="list">
-			<ul id="park_list">
-				<li>Park 1</li>
-				<li>Park 2</li>
-				<li>Park 3</li>
-				<li>Park 4</li>
-				<li>Park 5</li>
-				<li>Park 6</li>
-				<li>Park 8</li>
-				<li>Park 9</li>
-				<li>Park 10</li>
-				<li>Park 11</li>
-				<li>Park 12</li>
-				<li>Park 13</li>
-				<li>Park 14</li>
-				<li>Park 15</li>
-				<li>Park 16</li>
-				<li>Park 17</li>
-				<li>Park 18</li>
-				<li>Park 19</li>
-				<li>Park 20</li>
-			</ul>
+		<div id="container">
+			<div id="header">
+				<div class="left">
+					<div class="l1">
+						<i class="fa fa-chevron-left" id="backward" onclick="window.location.href = 'index.html'"></i>
+					</div>
+					<div class="l2">
+						<p id="title">PGH PLAY PROJECT</p>
+					</div>
+				</div>
+				<div class="right">
+					<div class="r">
+						<i class="fa fa-plus" id="plus"></i>
+						<i class="fa fa-bars" id="bars"></i>
+					</div>
+				</div>
+			</div>
+			<div id="near_you"></div>
+			<p id="nearyou_text" style="font-family: Karla">NEAR YOU</p>
+			<div id="googleMap"></div>
+			<div id="list">
+				<ul id="park_list">
+					<li>Park 1</li>
+					<li>Park 2</li>
+					<li>Park 3</li>
+					<li>Park 4</li>
+					<li>Park 5</li>
+					<li>Park 6</li>
+					<li>Park 8</li>
+					<li>Park 9</li>
+					<li>Park 10</li>
+					<li>Park 11</li>
+					<li>Park 12</li>
+					<li>Park 13</li>
+					<li>Park 14</li>
+					<li>Park 15</li>
+					<li>Park 16</li>
+					<li>Park 17</li>
+					<li>Park 18</li>
+					<li>Park 19</li>
+					<li>Park 20</li>
+				</ul>
+			</div>
 		</div>
 	</body>
 </html>

@@ -1,115 +1,162 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-* {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+#container {
+	height: 660;
+	width: 370;
+	position: relative;
 }
 
-body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
-    );
-    background-attachment:fixed;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    text-transform:uppercase;
-    width:100%;
+#header {
+	background-color: #178553;
+	height: 9%;
+	width: 100%;
+	color: white;
 }
 
-/* Portrait layout (default) */
-.app {
-    background:url(../img/pitt.jpg) no-repeat center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
-    left:30%;
-    top:50%;
-    height:540px;                   /* text area height */
-    width:380px;                   /* text area width */
-    text-align:center;
-    padding:180px 0px 0px 0px;    
-    margin:-115px 0px 0px -120px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
+#header>div {
+	display: inline-block;
+	vertical-align: middle;
+	overflow: visible;
 }
 
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-        background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px 0px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
-    }
+#title {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 120%;
+	font-weight: bold;
 }
 
-h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
+.left {
+	width: 60%;
+	padding-left: 5%;
+}
+.right {
+	width: 29%;
+	padding-right: 2%;
 }
 
-.event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
+.l {
+	float: left;
 }
 
-.event.listening {
-    background-color:#333333;
-    display:block;
+.r {
+	float: right;
 }
 
-.event.received {
-    background-color:#4B946A;
-    display:none;
+#plus {
+	font-size: 22;
+	margin-left: -20%;
 }
 
-@keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+#bars {
+	font-size: 22;
+	margin-left: 20%;
 }
- 
-@-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+
+#find {
+	background-image: url(../img/park2.jpg);
+	background-size: cover;
+	height: 50%;
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	align: center;
+	position: relative;
 }
- 
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
+
+#find_text {
+	font-size: 150%;
+	font-weight: bold;
+	padding-top: 10%;
+}
+
+#find_button {
+	background-color: #5CB056;
+	height: 15%;
+	width: 61%;
+	position: absolute;
+	top: 68%;
+	left: 20%;
+	z-index: 1;
+}
+
+#find_butt_text {
+	font-size: 135%;
+	font-weight: bold;
+	z-index: 1;
+	position: absolute;
+	top: 71.5%;
+	left: 30%;
+}
+
+#location_icon {
+	position: absolute;
+	font-size: 20;
+	top: 70%;
+	left: 23%;
+	z-index: 1;
+}
+
+/*.c {
+	display: inline-block;
+	vertical-align: middle;
+	overflow: visible;
+}*/
+
+#find_zip_text {
+	font-size: 125%;
+	color: white;
+	position: absolute;
+	top: 88%;
+	left: 16%;
+}
+
+#find_zip {
+	position: absolute;
+	font-size: 130%;
+	top: 88%;
+	left: 61%;
+	z-index: 1;
+}
+
+#find_zip_bg {
+	position: absolute;
+	top: 88%;
+	left: 61%;
+	background-color: white;
+	height: 7.5%;
+	width: 14.5%;
+}
+
+#find_zip_icon {
+	position: absolute;
+	top: 88%;
+	left: 78.8%;
+	background-color: #5CB056;
+	height: 7.5%;
+	width: 5%;
+	z-index: 1;
+}
+	
+#forward {
+	position: absolute;
+	top: 89.2%;
+	left: 79.5%;
+	font-size: 20;
+	z-index: 1;
+}
+
+#browse {
+	background-image: url(../img/park1.jpg);
+	height: 41%;
+	width: 100%;
+	background-size: cover;
+	margin: auto;
+	text-align: center;
+	align: center;
+}
+
+#browse_text {
+	font-size: 150%;
+	font-weight: bold;
+	padding-top: 10%;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
