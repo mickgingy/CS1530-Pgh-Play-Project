@@ -1,6 +1,6 @@
 <?php
 include 'interface.php';
-# User login PGH_Play
+# Get parks
 session_start();
-login();
+get_park_info();
 ?>
