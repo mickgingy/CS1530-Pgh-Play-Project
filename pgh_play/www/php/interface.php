@@ -163,7 +163,7 @@ function get_parks(){
 	if(isset($_GET['zip'])){
 		$query = "SELECT * FROM parks WHERE zip_code={$_GET['zip']}";
 	}else{
-		die("{error:\"Missing parameter: zip\"}");
+		die("{\"error\":\"Missing parameter: zip\"}");
 	}
 	$result = $db->query($query);
 	$row = $result->fetch_array();
@@ -203,72 +203,132 @@ function get_parks(){
 	return $results;
 }
 
-// enter new park into the db via new park form
-// this will store the following info in the db: Park name, address, rating, ages, comments
-//  all of these inputs are received by the new park form a user fills out
-// *****facilities and pictures still need to be implemented 
+/*
+Creates a new park in the system
+Parameters:
+	POST : obj - A properly JSON encoded string of a park:
+	{	"name" : "park_name",
+		"address" : "street_address",
+		"zip" : "zip_code",
+		"neighborhood" : "neighborhood_name",  (OPTIONAL)
+		"infant_safe" : "true|false|1|0",
+		"toddler_safe" : "true|false|1|0",
+		"five_eight_safe" : "true|false|1|0",
+		"nine_twelve_safe" : "true|false|1|0",
+		attributes : [
+			{	"attribute_id" : 1,
+				"attribute_name" : "Swingset"
+			},
+			{	"attribute_id" : 2,
+				"attribute_name" : "Grill"
+			},
+			...
+		]
+	}
+Returns:
+	JSON encoded object containing park information
+*/
 function new_park(){
 	global $db;
 	connect();
 	$park_id = 0;
 	
+	if(!isset($_POST['obj'])){
+		die("{\"error\":\"Missing parameter: obj\"}");
+	}
 	
-	// if name of park is entered, allow user to store name, address, and zip code of the new park
-	if(isset($_POST['name'])){
-		// set neighborhood if user chooses to
-		if(isset($_POST['neighborhood'])){
-			$query = "INSERT INTO parks (name, address, zip_code, neighborhood) VALUES  ('{$_POST['name']}', '{$_POST['address']}', '{$_POST['zip']}', '{$_POST['neighborhood']}')";
-			$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
+	$obj = json_decode($_POST['obj'], true);
+	$name = $obj['name'];
+	$address = $obj['address'];
+	$zip = $obj['zip_code'];
+	if(isset($obj['infant_safe']))
+		$infant_safe = $obj['infant_safe'];
+	else
+		$infant_safe = 0;
+	if(isset($obj['toddler_safe']))
+		$toddler_safe = $obj['toddler_safe'];
+	else
+		$toddler_safe=0;
+	if(isset($obj['five_eight_safe']))
+		$five_eight_safe = $obj['five_eight_safe'];
+	else
+		$five_eight_safe = 0;
+	if(isset($obj['nine_twelve_safe']))
+		$nine_twelve_safe = $obj['nine_twelve_safe'];
+	else
+		$nine_twelve_safe = 0;
+	
+	if(!isset($obj['neighborhood'])){
+		$result = $db->query("INSERT INTO parks (name, address, zip_code, infants, toddlers, five, nine) VALUES ('$name','$address','$zip',$infants,$toddlers,$five,$nine)");
+	}else{
+		$result = $db->query("INSERT INTO parks (name, address, zip_code, neighborhood, infants, toddlers, five, nine) VALUES ('$name','$address','$zip','{$obj['neighborhood']}',$infants,$toddlers,$five,$nine)");
+	}
+	if(isset($obj['attributes'])){
+		foreach($obj['attributes'] as $attribute){
+			$db->query("INSERT INTO ParkAttributes (park_id, attribute_id) VALUES ($p_id, {$attribute['attribute_id']}}))");
 		}
-		else{
-			$query = "INSERT INTO parks (name, address, zip_code) VALUES  ('{$_POST['name']}', '{$_POST['address']}', '{$_POST['zip']}')";
-			$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
-		}
-		echo "Thanks!";
 	}
-	else{
-		echo false;
-	}
-	// get park id variable from park table to correctly link the park to its attributes, ratings, comments, etc. (link  parks to other tables in db)
-		$query = "SELECT park_id FROM parks WHERE name='{$_POST['name']}'";
-		$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
-		$temp=$result->fetch_assoc();
-	
-	// store rating if set
-	if(isset($_POST['rating'])){
-		$query = "INSERT INTO ratings (park_id, rating) VALUES ('{$temp['park_id']}', '{$_POST['rating']}')";
-		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
-	}
-	
-
-	// store comment if set
-	if(isset($_POST['comment'])){
-		$query = "INSERT INTO comments (park_id, comment) VALUES ('{$temp['park_id']}', '{$_POST['comment']}')";
-		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
-	}
-	// store info about appropriate age groups for park if set
-	if (strcmp($_POST['infants'],"yes") == 0){
-		$query = "INSERT INTO ages (park_id, infants) VALUES ('{$temp['park_id']}', '{$_POST['infants']}')";
-		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
-	}
-	if (strcmp($_POST['toddlers'],"yes") == 0){
-		$query = "INSERT INTO ages (park_id, toddlers) VALUES ('{$temp['park_id']}', '{$_POST['toddlers']}')";
-		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
-	}
-	if (strcmp($_POST['five_eight'],"yes") == 0){
-		$query = "INSERT INTO ages (park_id, five) VALUES ('{$temp['park_id']}', '{$_POST['five_eight']}')";
-		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
-	}
-	if (strcmp($_POST['nine_twelve'],"yes") == 0){
-		$query = "INSERT INTO ages (park_id, nine) VALUES ('{$temp['park_id']}', '{$_POST['nine_twelve']}')";
-		$result = $db->query($query) or trigger_error(mysql_error(). " ".$query);
-	}
-	#NOTE: You'll notice that the ages table is kinda wonky because this inserts a row for every checked box for the ages... This may need fixed/refactored depending on how we handle it with the client-side
-
-
-	
 }
 
-
+/*
+Returns the detailed park info in JSON form given a park_id
+Parameters:
+	GET : park_id
+Returns:
+	JSON encoded object containing park information:
+	{	"name" : "park_name",
+		"address" : "street_address",
+		"zip" : "zip_code",
+		"neighborhood" : "neighborhood_name",  (OPTIONAL)
+		"infant_safe" : "true|false|1|0",
+		"toddler_safe" : "true|false|1|0",
+		"five_eight_safe" : "true|false|1|0",
+		"nine_twelve_safe" : "true|false|1|0",
+		attributes : [
+			{	"attribute_id" : 1,
+				"attribute_name" : "Swingset"
+			},
+			{	"attribute_id" : 2,
+				"attribute_name" : "Grill"
+			},
+			...
+		]
+	}
+*/
+function get_park_info(){
+	global $db;
+	connect();
+	if(isset($_GET['park_id'])){
+		$p_id = $_GET['park_id'];
+		$output = array();
+		$result = $db->query("SELECT * FROM Parks WHERE park_id = $p_id");
+		$row = $result->fetch_array();
+		if($row == NULL){
+			die("{\"error\":\"Invalid park_id\"}");
+		}else{
+			$output['name'] = $row['name'];
+			$output['park_id'] = $row['park_id'];
+			$output['address'] = $row['address'];
+			$output['zip'] = $row['zip_code'];
+			$output['neighborhood'] = $row['neighborhood'];
+			$output['infant_safe'] = $row['infant'];
+			$output['toddler_safe'] = $row['toddlers'];
+			$output['five_eight_safe'] = $row['five'];
+			$output['nine_twelve_safe'] = $row['nine'];
+			$result = $db->query("SELECT * FROM attributes, ParkAttributes WHERE attributes.attribute_id = ParkAttributes.attribute_id AND park_id=$p_id");
+			$row = $result->fetch_array();
+			$i = 0;
+			while(row != NULL){
+				$output['attributes'][$i]['attribute_id'] = $row['attribute_id'];
+				$output['attributes'][$i]['attribute_name'] = $row['attribute'];
+				$row = $result->fetch_array();	
+			}
+		}
+		
+		echo json_encode($output);
+	}else{
+		die("{\"error\":\"Missing parameter: park_id\"}");
+	}
+}
 
 ?>
