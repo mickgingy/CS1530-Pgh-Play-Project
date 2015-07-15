@@ -284,6 +284,8 @@ Returns:
 		"toddler_safe" : "true|false|1|0",
 		"five_eight_safe" : "true|false|1|0",
 		"nine_twelve_safe" : "true|false|1|0",
+		"rating" : #.#####,
+		"num_ratings" : ##,
 		attributes : [
 			{	"attribute_id" : 1,
 				"attribute_name" : "Swingset"
