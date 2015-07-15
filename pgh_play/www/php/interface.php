@@ -315,12 +315,17 @@ function get_park_info(){
 			$output['toddler_safe'] = $row['toddlers'];
 			$output['five_eight_safe'] = $row['five'];
 			$output['nine_twelve_safe'] = $row['nine'];
+			$result = $db->query("SELECT AVERAGE(rating) as star, COUNT(rating) as num FROM comments WHERE park_id=$p_id");
+			$row = $result->fetch_array();
+			$output['rating'] = $row['star'];
+			$output['num_ratings'] = $row['num'];
 			$result = $db->query("SELECT * FROM attributes, ParkAttributes WHERE attributes.attribute_id = ParkAttributes.attribute_id AND park_id=$p_id");
 			$row = $result->fetch_array();
 			$i = 0;
 			while(row != NULL){
 				$output['attributes'][$i]['attribute_id'] = $row['attribute_id'];
 				$output['attributes'][$i]['attribute_name'] = $row['attribute'];
+				$i++;
 				$row = $result->fetch_array();	
 			}
 		}
@@ -331,4 +336,72 @@ function get_park_info(){
 	}
 }
 
+/*
+	Adds a new comment to a specific park
+	Parameters:
+		POST : park_id
+		POST : comment
+		POST : user_id
+		POST : star_rating
+	Returns:
+		None
+*/
+function add_comment(){
+	global $db;
+	connect();
+	if(isset($_POST['comment'])){
+		$uid = $_POST['user_id'];
+		$pid = $_POST['park_id'];
+		$c = $_POST['comment'];
+		$r = $_POST['star_rating'];
+		$db->query("INSERT INTO comments (user_id, park_id, comment, rating) VALUES ($uid,$pid,'$c',$r)");
+	}else{
+		die("{\"error\":\"Missing parameter(s)\"}");
+	}	
+}
+
+/*
+	Returns a list of JSON encoded comments for a specific park
+	Parameters:
+		GET : park_id
+	Returns:
+		JSON Encoded list of comments for a specific park
+		[
+			{
+				"user_id" : 1,
+				"user_name" : "Nick",
+				"comment" : "This park is awesome.",
+				"rating" : 5
+			},
+			{
+				"user_id" : 2,
+				"user_name" : "Mick",
+				"comment" : "This park is terrible.",
+				"rating" : 0
+			},
+			...
+		]
+*/
+function get_comments(){
+	global $db;
+	connect();
+	if(isset($_GET['park_id'])){
+		$output = array();
+		$i = 0;
+		$pid = $_GET['park_id'];
+		$result = $db->query("SELECT * FROM comments, users WHERE comments.user_id = users.user_id AND park_id = $pid");
+		$row = $result->fetch_array();
+		while($row != NULL){
+			$output[$i]['user_id'] = $row['user_id'];
+			$output[$i]['user_name'] = $row['users.name'];
+			$output[$i]['comment'] = $row['comment'];
+			$output[$i]['rating'] = $row['rating'];
+			$i++;
+			$row = $result->fetch_array();	
+		}
+		echo json_encode($output);
+	}else{
+		die("{\"error\":\"Missing parameter: park_id\"}");
+	}
+}
 ?>

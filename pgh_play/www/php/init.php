@@ -32,8 +32,8 @@ $db->query("drop table ages");
  $result = $db->query("create table attributes (attribute_id int primary key not null AUTO_INCREMENT, attribute char(50) not null)") or die ("Invalid: " . $db->error);
  $result = $db->query("create table ParkAttributes (park_id int not null, attribute_id int not null)") or die ("Invalid: " . $db->error);
  //$result = $db->query("create table pictures (park_id int not null, picture char(50) not null)") or die ("Invalid: " . $db->error);
- $result = $db->query("create table comments (user_id int not null, park_id int not null, comment char(250) not null)") or die ("Invalid: " . $db->error);
- $result = $db->query("create table ratings (park_id int primary key not null, rating double not null, num_votes int not null)") or die ("Invalid: " . $db->error); 
+ $result = $db->query("create table comments (user_id int not null, park_id int not null, comment char(250) not null, rating, double not null)") or die ("Invalid: " . $db->error);
+ //$result = $db->query("create table ratings (park_id int primary key not null, rating double not null, num_votes int not null)") or die ("Invalid: " . $db->error); 
  
  //$result = $db->query("create table ages (park_id int not null, infants bool, toddlers bool, five bool, nine bool)") or die ("Invalid: " . $db->error); 
  
