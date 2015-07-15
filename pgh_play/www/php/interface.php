@@ -404,4 +404,39 @@ function get_comments(){
 		die("{\"error\":\"Missing parameter: park_id\"}");
 	}
 }
+
+/*
+	Returns a list of JSON encoded attributes list to recommend to user during park creation
+	Parameters:
+		None
+	Returns:
+		JSON Encoded list of attributes
+		[
+			{
+				"attribute_id" : 1,
+				"attribute_name" : "Swimming Pool"
+			},
+			{
+				"attribute_id" : 2,
+				"attribute_name" : "Swing Set"
+			},
+			...
+		]
+*/
+function get_attributes_list(){
+	global $db;
+	connect();
+	$result = $db->query("SELECT * FROM attributes");
+	$output = array();
+	$i = 0;
+	$row = $result->fetch_array();
+	while($row != NULL){
+		$output[$i]['attribute_id'] = $row['attribute_id'];
+		$output[$i]['attribute_name'] = $row['attribute_name'];
+		$i++;
+		$row = $result->fetch_array();
+	}
+	
+	echo json_encode($output);
+}
 ?>
