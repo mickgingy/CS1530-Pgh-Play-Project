@@ -240,7 +240,7 @@ function new_park(){
 	$obj = json_decode($_POST['obj'], true);
 	$name = $obj['name'];
 	$address = $obj['address'];
-	$zip = $obj['zip_code'];
+	$zip = $obj['zip'];
 	if(isset($obj['infant_safe']))
 		$infant_safe = $obj['infant_safe'];
 	else
@@ -259,13 +259,13 @@ function new_park(){
 		$nine_twelve_safe = 0;
 	
 	if(!isset($obj['neighborhood'])){
-		$result = $db->query("INSERT INTO parks (name, address, zip_code, infants, toddlers, five, nine) VALUES ('$name','$address','$zip',$infants,$toddlers,$five,$nine)");
+		$result = $db->query("INSERT INTO parks (name, address, zip_code, infants, toddlers, five, nine) VALUES ('$name','$address','$zip','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe')") or trigger_error(mysql_error());
 	}else{
-		$result = $db->query("INSERT INTO parks (name, address, zip_code, neighborhood, infants, toddlers, five, nine) VALUES ('$name','$address','$zip','{$obj['neighborhood']}',$infants,$toddlers,$five,$nine)");
+		$result = $db->query("INSERT INTO parks (name, address, zip_code, neighborhood, infants, toddlers, five, nine) VALUES ('$name','$address','$zip','{$obj['neighborhood']}','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe')") or trigger_error(mysql_error());
 	}
 	if(isset($obj['attributes'])){
 		foreach($obj['attributes'] as $attribute){
-			$db->query("INSERT INTO ParkAttributes (park_id, attribute_id) VALUES ($p_id, {$attribute['attribute_id']}}))");
+			$db->query("INSERT INTO ParkAttributes (park_id, attribute_id) VALUES ($park_id, {$attribute['attribute_id']}}))");
 		}
 	}
 }
