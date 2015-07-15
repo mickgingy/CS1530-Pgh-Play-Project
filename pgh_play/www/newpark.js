@@ -42,8 +42,27 @@ $(document).ready(function(){
 			}
 			var comment = $('textarea#comment').val();
 			
+			
+		var obj = {	"name" : name,
+		"address" : address,
+		"zip" : zip,
+		"neighborhood" : neighborhood, 
+		"infant_safe" : infants,
+		"toddler_safe" : toddlers,
+		"five_eight_safe" : five_eight,
+		"nine_twelve_safe" : nine_twelve,
+		attributes : [
+			{	"attribute_id" : 1,
+				"attribute_name" : "Swingset"
+			},
+			{	"attribute_id" : 2,
+				"attribute_name" : "Grill"
+			}
+		]
+	};
+	alert(obj.name);
 			// post to server to store information
-			$.post('newpark.php',{name:name, address:address, zip:zip, neighborhood:neighborhood, rating:rating, infants:infants, toddlers:toddlers, five_eight:five_eight, nine_twelve:nine_twelve, comment:comment}, function(data){
+			$.post('newpark.php',{obj:JSON.stringify(obj)}, function(data){
 				alert(data);
 			
 			});
