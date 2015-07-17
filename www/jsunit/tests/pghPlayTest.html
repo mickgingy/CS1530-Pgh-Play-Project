@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/jsUnitStyle.css">
+    <script type="text/javascript" src="../app/jsUnitCore.js"></script>
+	<!-- INSERT ALL JS FILES USED HERE !-->
+	<script type="text/javascript" src="../../js/index.js"></script>
+    <script type="text/javascript">
+		//ALL TESTS MUST START WITH test  e.g.  testFunctionA, testFunctionB, testPGHStuff
+		//All these tests are failing due to non-existant functions.
+		function testGetLocationNotNull() {
+			assertNotNull("Getting Location", getLocation());
+		}
+        function testLoadParksNullInput() {
+            assertNull("Load Parks Null", loadParks(null));
+        }
+		
+		function testLoadParksNotNull() {
+			assertNotNull("Load Parks NNull", loadParks(getLocation()));
+		}
+		
+		function testLoadParksBadInput() {
+			assertNull("Load Parks w/ Bad Input", loadParks("parks smell"));
+		}
+		
+		function testLoadNeighborhoodsNotNull() {
+			assertNotNull("Load neighborhoods", loadNeighborhoods());
+		}
+
+    </script>
+</head>
+
+<body>
+<h1>Pgh Play Tester</h1>
+<p>This page contains tests to test the pgh play javascript</p>
+</body>
+</html>
