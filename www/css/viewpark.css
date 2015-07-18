@@ -1,12 +1,12 @@
 #container {
-	height: 660;
+	height: 990;
 	width: 370;
 	position: relative;
 }
 
 #header {
 	background-color: #178553;
-	height: 9%;
+	height: 6%;
 	width: 100%;
 	color: white;
 }
@@ -59,11 +59,4 @@
 #bars {
 	font-size: 22;
 	margin-left: 20%;
-}
-
-#the_list {
-	height: 91%;
-	width: 100%;
-	overflow: hidden;
-	background-color: #0E6F48;
 }
