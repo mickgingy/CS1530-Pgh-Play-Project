@@ -56,13 +56,23 @@ function sendLocation() {
 }
 
 /**
- *	function addPlayground()
+ *	function logInOrAdd()
  *
  *	Under Construction
  */
-function addPlayground() {
-	alert("Plus");
+function logInOrAdd() {
+    // If user cookie already exists
+	if (document.cookie.indexOf("user") >= 0) {
+		window.location.href = "newpark.html";
+	}
+	else {
+		window.location.href = "pghlogin.html";
+	}
+	
 }
+
+// 
+var moved = false;
 
 /**
  *	function userMenu()
@@ -70,5 +80,14 @@ function addPlayground() {
  *	Under Construction
  */
 function userMenu() {
-	alert("Menu");
+	if (moved) {
+		$('#menu').animate({right: "-40%"}, 200);
+		// $('.options').animate({left: "-210px"}, 200);
+		moved = false;
+	}
+	else {
+		$('#menu').animate({right: "0%"}, 200);
+		// $('.options').animate({left: "0px"}, 200);
+		moved = true;
+	}
 }

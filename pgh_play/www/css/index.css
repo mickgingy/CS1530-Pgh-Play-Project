@@ -2,6 +2,7 @@
 	height: 660;
 	width: 370;
 	position: relative;
+	overflow: hidden;
 }
 
 #header {
@@ -159,4 +160,14 @@
 	padding-top: 10%;
 	color: white;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#menu {
+	position: absolute;
+	top: 9%;
+	right: -40%;
+	height: 91%;
+	width: 40%;
+	z-index: 1;
+	background-color: #0E6F48;
 }
