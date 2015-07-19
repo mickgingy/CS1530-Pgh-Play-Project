@@ -24,7 +24,7 @@ $db->query("drop table ages");
 $db->query("drop table Parkattributes");
   
 # initialize user, parks, and neighborhoods tables
- $result = $db->query("create table users (user_id int primary key not null AUTO_INCREMENT, user char(20) not null,  name char(20) not null, password char(255) not null, email char (50) not null)") or die ("Invalid: " . $db->error);
+ $result = $db->query("create table users (user_id int primary key not null AUTO_INCREMENT, email char(50) not null,  name char(20) not null, password char(255) not null, email char (50) not null)") or die ("Invalid: " . $db->error);
  $result = $db->query("create table parks (park_id int primary key not null AUTO_INCREMENT, name char(50) not null, address char(100) not null, zip_code int not null, neighborhood char(50), infants bool, toddlers bool, five bool, nine bool)") or die ("Invalid: " . $db->error);	
  $result = $db->query("create table neighborhoods (neighborhood_id int primary key not null AUTO_INCREMENT, name char(50) not null, zip_code char(10) not null)") or die ("Invalid: " . $db->error);
 
