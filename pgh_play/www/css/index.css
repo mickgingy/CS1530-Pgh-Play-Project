@@ -1,8 +1,9 @@
 #container {
-	height: 660;
-	width: 370;
+	height: 103.5%;
+	width: 104%;
+	top: -2%;
+	left: -2%;
 	position: relative;
-	overflow: hidden;
 }
 
 #header {
@@ -65,13 +66,16 @@
 #find_text {
 	font-size: 150%;
 	font-weight: bold;
-	padding-top: 10%;
+	top: 10%;
+	position: relative;
 }
 
 #find_button {
 	background-color: #5CB056;
 	height: 15%;
 	width: 61%;
+	min-height: 54px;
+	min-width: 240px;
 	position: absolute;
 	top: 68%;
 	left: 20%;
@@ -90,7 +94,7 @@
 #location_icon {
 	position: absolute;
 	font-size: 20;
-	top: 70%;
+	top: 72%;
 	left: 23%;
 	z-index: 1;
 }
@@ -157,7 +161,8 @@
 #browse_text {
 	font-size: 150%;
 	font-weight: bold;
-	padding-top: 10%;
+	top: 10%;
+	position: relative;
 	color: white;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
