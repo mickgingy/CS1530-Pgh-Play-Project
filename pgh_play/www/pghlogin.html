@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html>
-<body>
-<H1> Pittsburgh Play Login </H1><br>
-<body>
-
-<br><br>
-<form action="PGHLogin.php" method="post">
-Username: <input type="text" name="username"><br>
-Password: <input type="password" name="password"><br>
-<input type="submit" name="formSubmit" value="Enter"><br><br>
-New User? <a href="/newuser.html">Sign up here!</a>
-</form>
-
-</body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/phplogin.css">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Karla">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<div class="left">
+					<div class="l1">
+						<i class="fa fa-chevron-left" id="backward" onclick="window.location.href = 'index.html'"></i>
+					</div>
+					<div class="l2">
+						<p id="title">PGH PLAY PROJECT</p>
+					</div>
+				</div>
+				<div class="right">
+					<div class="r">
+						<i class="fa fa-plus" id="plus"></i>
+						<i class="fa fa-bars" id="bars"></i>
+					</div>
+				</div>
+			</div>
+			<div id="login">
+				<form action="PGHLogin.php" method="post">
+					Username: <input type="text" name="username"><br>
+					Password: <input type="password" name="password"><br>
+					<input type="submit" name="formSubmit" value="Enter"><br><br>
+					New User? <a href="/newuser.html">Sign up here!</a>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>

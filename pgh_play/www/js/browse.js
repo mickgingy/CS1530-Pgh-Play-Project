@@ -8,10 +8,14 @@ var main = function() {
   	ajax.onreadystatechange = function() {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			alert("yas");
+			var response = ajax.responseText;
+			alert(response);
+			//var hoods = JSON.parse(response);
+			//var hoods = JSON.parse(ajax.response);
 		}
 	}
 	
-	ajax.open("GET", "php/phpgetneighborhoods.php", true);	
+	ajax.open("GET", "php/pghgetneighborhoods.php", true);	
 	ajax.send();
 };
 
