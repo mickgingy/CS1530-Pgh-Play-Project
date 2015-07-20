@@ -1,4 +1,4 @@
-#addpark, #pname, #paddress, #phood, #pattributes, #whatisitgoodfor, #rating_div, #upload, #submit {
+#pname, #paddress, #phood, #pattributes, #whatisitgoodfor, #rating_div, #upload, #submit {
 	width: 100%;
 	font-family: Karla;
 }
@@ -10,16 +10,19 @@
 	color: black;
 	background: transparent;
 	padding-left: 3%;
+	font-size: 90%;
 }
 
 #addpark {
-	height: 4%;
+	height: 5%;
 	vertical-align: middle;
 	background-color: #0E6F48;
 	color: white;
 	font-weight: bold;
 	padding-top: 3%;
 	padding-left: 3%;
+	font-family: Karla;
+	font-size: 120%;
 }
 
 #pname, #paddress, #phood {
@@ -31,27 +34,36 @@
 
 ::-webkit-input-placeholder { /* WebKit browsers */
     color: #0E6F48;
+	font-size: 85%;
+	font-weight: bold;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: #0E6F48;
-   opacity: 1;
+   	color: #0E6F48;
+   	opacity: 1;
+	font-size: 85%;
+	font-weight: bold;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: #0E6F48;
-   opacity: 1;
+  	 color: #0E6F48;
+  	 opacity: 1;
+	 font-size: 85%;
+	font-weight: bold;
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-   color: #0E6F48;
+  	 color: #0E6F48;
+  	 font-size: 85%;
+	font-weight: bold;
 }
 
 #pattributes {
 	border-top: 1px solid lightgray;
-	height: 40%;
+	height: 39%;
 	vertical-align: text-top;
 }
 
 #l_attributes, #r_attributes { 
-	width: 49.5%;
+	margin-left: 1%;
+	width: 48.5%;
 	display: inline-block;
 	top: 0%;
 	float: left;
@@ -63,12 +75,37 @@
 
 #rating_div {
 	border-top: 1px solid lightgray;
+	vertical-align: middle;
+	
 }
 
 #upload, #submit {
 	border-top: 1px solid lightgray;
+	text-align: center;
 }
 
+.btn {
+	width: 10%;
+	color: white;
+	font-size: 120%;
+	letter-spacing: 1px;
+	font-family: Karla;
+	border: none;
+	
+}
+
+#up_btn {
+	background-color: #85CF61;
+}
+
+#sub_btn {
+	background-color: #5CB056;
+	font-size: 130%;
+}
+
+#rating-text {
+	vertical-align: center;
+}
 
 .rating {
     float:left;

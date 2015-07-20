@@ -52,6 +52,34 @@
 	margin-left: 20%;
 }
 
+#menu {
+	position: absolute;
+	top: 9%;
+	right: -40%;
+	height: 91%;
+	width: 40%;
+	z-index: 1;
+	background-color: #0E6F48;
+}
+
+.btn {
+	position: relative;
+	margin-bottom: 1.5%;
+	height: 8.5%;
+	width: 100%;
+	z-index: 1;
+    background-color: #5CB553;
+}
+
+.txt {
+	position: absolute;
+	top: 32%;
+	left: 7.5%;
+	color: black;
+	font-size: 110%;
+	font-weight: bold;
+}
+
 #find {
 	background-image: url(../img/park2.jpg);
 	background-size: cover;
@@ -165,77 +193,4 @@
 	position: relative;
 	color: white;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-#menu {
-	position: absolute;
-	top: 9%;
-	right: -40%;
-	height: 91%;
-	width: 40%;
-	z-index: 1;
-	background-color: #0E6F48;
-}
-
-#account_btn {
-	position: absolute;
-	top: 5%;
-	right: 6.5%;
-	height: 6%;
-	width: 85%;
-	z-index: 1;
-    border-width: 2px;	
-    border-style: solid;
-	border-color: #CADEC3;
-}
-
-#account_text {
-	position: absolute;
-	top: 20%;
-	right: 5%;
-	color: #AFCF9F;
-	font-size: 100%;
-	font-weight: bold;
-}
-
-#logout_btn {
-	position: absolute;
-	top: 15%;
-	right: 6.5%;
-	height: 6%;
-	width: 85%;
-	z-index: 1;
-    border-width: 2px;	
-    border-style: solid;
-	border-color: #CADEC3;
-}
-
-#logout_text {
-	position: absolute;
-	top: 20%;
-	right: 60%;
-	color: #AFCF9F;
-	font-size: 100%;
-	font-weight: bold;
-}
-
-#report_btn {
-	position: absolute;
-	top: 25%;
-	right: 6.5%;
-	height: 6%;
-	width: 85%;
-	z-index: 1;
-    border-width: 2px;	
-    border-style: solid;
-	border-color: #CADEC3;
-}
-
-#report_text {
-	position: absolute;
-	top: 20%;
-	right: 5%;
-	color: #AFCF9F;
-	font-size: 100%;
-	font-weight: bold;
 }

@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">//Imports the JQuery Library</script>
 		<script src="js/index.js">//Imports custom JavaScript for this page</script>
+		<script src="js/menu.js">//Imports JavaScript for the menu bar</script>
 	</head>
 	<body>
 		<div id="container">
@@ -38,14 +39,14 @@
 				<div id="browse_text" style="font-family: Karla">Browse neighborhoods</div>
 			</div>
 			<div id="menu">
-				<div id="account_btn" onclick="window.location.href = 'account.html'">
-					<div id="account_text" style="font-family: Karla">Account Settings</div>
+				<div class="btn" id="account_btn" onclick="window.location.href = 'account.html'">
+					<div class="txt" style="font-family: Karla">Account Settings</div>
 				</div>
-				<div id="logout_btn" onclick="logout()">
-					<div id="logout_text" style="font-family: Karla">Logout</div>
+				<div class="btn" id="logout_btn" onclick="logout()">
+					<div class="txt" style="font-family: Karla">Logout</div>
 				</div>
-				<div id="report_btn" onclick="window.location.href = 'report.html'">
-					<div id="report_text" style="font-family: Karla">Report a Problem</div>
+				<div class="btn" id="report_btn" onclick="window.location.href = 'report.html'">
+					<div class="txt" style="font-family: Karla">Report a Problem</div>
 				</div>
 			</div>
 		</div>

@@ -69,3 +69,31 @@
 	font-size: 22;
 	margin-left: 20%;
 }
+
+#menu {
+	position: absolute;
+	top: 9%;
+	right: -40%;
+	height: 91%;
+	width: 40%;
+	z-index: 1;
+	background-color: #0E6F48;
+}
+
+.btn {
+	position: relative;
+	margin-bottom: 1.5%;
+	height: 8.5%;
+	width: 100%;
+	z-index: 1;
+    background-color: #5CB553;
+}
+
+.txt {
+	position: absolute;
+	top: 32%;
+	left: 7.5%;
+	color: black;
+	font-size: 110%;
+	font-weight: bold;
+}

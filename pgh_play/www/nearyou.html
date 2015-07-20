@@ -4,8 +4,10 @@
 		<link rel="stylesheet" type="text/css" href="css/container_header.css">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Karla">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">//Imports the JQuery Library</script>
 		<script src="http://maps.googleapis.com/maps/api/js">//Imports the Google Maps API</script>
 		<script src="js/nearyou.js">//Imports custom JavaScript for this page</script>
+		<script src="js/menu.js">//Imports JavaScript for the menu bar</script>
 	</head>
 	<body>
 		<div id="container">
@@ -20,9 +22,20 @@
 				</div>
 				<div class="right">
 					<div class="r">
-						<i class="fa fa-plus" id="plus"></i>
-						<i class="fa fa-bars" id="bars"></i>
+						<i class="fa fa-plus" id="plus" onclick="addPark()"></i>
+						<i class="fa fa-bars" id="bars" onclick="userMenu()"></i>
 					</div>
+				</div>
+			</div>
+			<div id="menu">
+				<div class="btn" id="account_btn" onclick="window.location.href = 'account.html'">
+					<div class="txt" style="font-family: Karla">Account Settings</div>
+				</div>
+				<div class="btn" id="logout_btn" onclick="logout()">
+					<div class="txt" style="font-family: Karla">Logout</div>
+				</div>
+				<div class="btn" id="report_btn" onclick="window.location.href = 'report.html'">
+					<div class="txt" style="font-family: Karla">Report a Problem</div>
 				</div>
 			</div>
 			<div id="near_you"></div>
