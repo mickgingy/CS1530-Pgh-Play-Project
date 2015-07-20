@@ -37,28 +37,24 @@ function connect(){
 function create_new() {
 	global $db;
 	connect();
-	$query = "SELECT user from users WHERE user = '{$_POST['username']}'";
-	$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
-	$user = $result->fetch_array();
-	
 	#check if email already exists
 	$query = "SELECT email from users WHERE email = '{$_POST['email']}'";
 	$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 	$email = $result->fetch_array();
 	//Check the count of items to see if this user has already been created or not
-	if (sizeof($email) > 0 || sizeof($user) > 0):
-		echo "exists"; // if email or username already exist, user must re-enter new information
-		return false;
+	if ($email !== NULL):
+		echo "exists"; // if email already exists, user must re-enter new information
+		//return false;
 	else:
 		//echo "dne"; // User does not exist
 		$pass = hash('sha256', rtrim($_POST["pw"]));
 		// hash password and enter new user into DB
-		$query = "INSERT INTO users (user, name, password, email) VALUES  ('{$_POST['username']}', '{$_POST['name']}', '$pass', '{$_POST['email']}')";
+		$query = "INSERT INTO users (email, name, password) VALUES  ('{$_POST['email']}', '{$_POST['name']}', '$pass')";
 		$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 		echo $result;
-		return true;
+		//return true;
 	endif;
-	return false;
+	//return false;
 }
 
 /*
@@ -71,21 +67,25 @@ function create_new() {
 function login() {
 	global $db;
 	connect();
-	$pass = hash('sha256', rtrim($_POST["pw"]));
+	$pass = hash('sha256', rtrim($_POST["password"]));
 	// verify username and password match
-	$query = "SELECT * FROM users  WHERE user='{$_POST['username']}' && password='$pass'";
+	$query = "SELECT * FROM users WHERE email='{$_POST['email']}' && password='$pass'";
 	$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 	$pws = $result->fetch_all(MYSQLI_ASSOC);
-	if ($result->num_rows ==1)
+	
+	$retval = "";
+	
+	if ($result->num_rows == 1)
 	{
 		// store session var and go to browse.html
-		$_SESSION['user'] = $_POST['username'];
-		header('Location: http://localhost:8666/browse.html');
+		$retval = $_POST['email'];
 	}
 	else
 	{
-		header('Location: http://localhost:8666/PGHlogin.html');
+		$retval = "failure";
 	}
+	
+	echo $retval;
 }
 
 /*

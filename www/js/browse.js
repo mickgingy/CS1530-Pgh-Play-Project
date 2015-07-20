@@ -7,7 +7,6 @@ var main = function() {
 	ajax = new XMLHttpRequest();
   	ajax.onreadystatechange = function() {
 		if (ajax.readyState == 4 && ajax.status == 200) {
-			alert("yas");
 			var response = ajax.responseText;
 			alert(response);
 			//var hoods = JSON.parse(response);

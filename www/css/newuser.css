@@ -1,0 +1,36 @@
+#create_text {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size: 200%;
+	font-family: Karla;
+	margin-top: 10%;
+	margin-bottom: 5%;
+}
+
+#form_div {
+	height: 91%;
+	width: 100%;
+	overflow: hidden;
+	background-color: white;
+	text-align: center;
+}
+
+.input {
+	height: 12%;
+	width: 72%;
+	padding: 5%;
+	font-size: 125%;
+	letter-spacing: 1px;
+	font-family: Karla;
+	border: 2px solid lightgray;
+	margin-bottom: 1%;
+}
+
+#enter {
+	margin-top: 2%;
+	color: white;
+	border: 1px solid lightgray;
+	font-size: 170%%;
+	background-color: #5CB056;
+}

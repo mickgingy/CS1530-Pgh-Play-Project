@@ -1,0 +1,140 @@
+#pname, #paddress, #phood, #pattributes, #whatisitgoodfor, #rating_div, #upload, #submit {
+	width: 100%;
+	font-family: Karla;
+}
+
+.input {
+	border: none;
+	height: 100%;
+	width: 100%;
+	color: black;
+	background: transparent;
+	padding-left: 3%;
+	font-size: 90%;
+}
+
+#addpark {
+	height: 5%;
+	vertical-align: middle;
+	background-color: #0E6F48;
+	color: white;
+	font-weight: bold;
+	padding-top: 3%;
+	padding-left: 3%;
+	font-family: Karla;
+	font-size: 120%;
+}
+
+#pname, #paddress, #phood {
+	height: 5%;
+	border-top: 1px solid #0E6F48;
+	vertical-align: middle;
+	background-color: #5CB056;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #0E6F48;
+	font-size: 85%;
+	font-weight: bold;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   	color: #0E6F48;
+   	opacity: 1;
+	font-size: 85%;
+	font-weight: bold;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  	 color: #0E6F48;
+  	 opacity: 1;
+	 font-size: 85%;
+	font-weight: bold;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  	 color: #0E6F48;
+  	 font-size: 85%;
+	font-weight: bold;
+}
+
+#pattributes {
+	border-top: 1px solid lightgray;
+	height: 39%;
+	vertical-align: text-top;
+}
+
+#l_attributes, #r_attributes { 
+	margin-left: 1%;
+	width: 48.5%;
+	display: inline-block;
+	top: 0%;
+	float: left;
+}
+
+#whatisitgoodfor {
+	border-top: 1px solid lightgray;
+}
+
+#rating_div {
+	border-top: 1px solid lightgray;
+	vertical-align: middle;
+	
+}
+
+#upload, #submit {
+	border-top: 1px solid lightgray;
+	text-align: center;
+}
+
+.btn {
+	width: 10%;
+	color: white;
+	font-size: 120%;
+	letter-spacing: 1px;
+	font-family: Karla;
+	border: none;
+	
+}
+
+#up_btn {
+	background-color: #85CF61;
+}
+
+#sub_btn {
+	background-color: #5CB056;
+	font-size: 130%;
+}
+
+#rating-text {
+	vertical-align: center;
+}
+
+.rating {
+    float:left;
+    width:300px;
+}
+.rating span { float:right; position:relative; }
+.rating span input {
+    position:absolute;
+    top:0px;
+    left:0px;
+    opacity:0;
+}
+.rating span label {
+    display:inline-block;
+    width:30px;
+    height:30px;
+    text-align:center;
+    color:#FFF;
+    background:#ccc;
+    font-size:30px;
+    margin-right:2px;
+    line-height:30px;
+    border-radius:50%;
+    -webkit-border-radius:50%;
+}
+.rating span:hover ~ span label,
+.rating span:hover label,
+.rating span.checked label,
+.rating span.checked ~ span label {
+    background:#F90;
+    color:#FFF;
+}

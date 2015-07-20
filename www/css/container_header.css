@@ -1,6 +1,13 @@
+@font-face {
+	font-family: Karla;
+	src: url(http://fonts.googleapis.com/css?family=Karla);
+}
+
 #container {
-	height: 660;
-	width: 370;
+	height: 103.5%;
+	width: 104%;
+	top: -2%;
+	left: -2%;
 	position: relative;
 }
 
@@ -26,7 +33,7 @@
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 120%;
 	font-weight: bold;
-	padding-left: 4%;
+	margin-left: 4%;
 }
 
 .left {
@@ -41,10 +48,12 @@
 
 .l1 {
 	float: left;
+	height: 100%;
 }
 
 .l2 { 
 	float: left;
+	width: 80%;
 }
 
 .r {
@@ -61,9 +70,30 @@
 	margin-left: 20%;
 }
 
-#the_list {
+#menu {
+	position: absolute;
+	top: 9%;
+	right: -40%;
 	height: 91%;
-	width: 100%;
-	overflow: hidden;
+	width: 40%;
+	z-index: 1;
 	background-color: #0E6F48;
+}
+
+.btn {
+	position: relative;
+	border: 1px solid #0E6F48;
+	height: 8.5%;
+	width: 100%;
+	z-index: 1;
+    background-color: #5CB553;
+}
+
+.txt {
+	position: absolute;
+	top: 32%;
+	left: 7.5%;
+	color: black;
+	font-size: 110%;
+	font-weight: bold;
 }
