@@ -78,8 +78,7 @@ function login() {
 	if ($result->num_rows == 1)
 	{
 		// store session var and go to browse.html
-		$_SESSION['user'] = $_POST['email'];
-		$retval = "success";
+		$retval = $_POST['email'];
 	}
 	else
 	{

@@ -82,7 +82,7 @@
 
 .btn {
 	position: relative;
-	margin-bottom: 1.5%;
+	border: 1px solid #0E6F48;
 	height: 8.5%;
 	width: 100%;
 	z-index: 1;

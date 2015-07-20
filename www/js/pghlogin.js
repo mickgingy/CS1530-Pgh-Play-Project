@@ -9,17 +9,14 @@ function login() {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			var response = ajax.responseText;
 
-			if (response == "success") {
-			    date = new Date();
-			    date.setTime(date.getTime() + (24*60*60*1000));
-				document.cookie = "user=true; expires=" + date.toGMTString();
-				window.location.href = "index.html";
-			}
-			else if (response == "failure") {
-				window.location.href = "pghlogin.html";
+			if (response == "failure") {
+				window.location.href = "pghlogin.html";	
 			}
 			else {
-				alert("wut");
+			    date = new Date();
+			    date.setTime(date.getTime() + (24*60*60*1000));
+				document.cookie = "user=" + response + "; expires=" + date.toGMTString();
+				window.location.href = "index.html";
 			}
 		}
 	}
