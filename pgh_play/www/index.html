@@ -16,7 +16,7 @@
 				</div>
 				<div class="right">
 					<div class="r">
-						<i class="fa fa-plus" id="plus" onclick="logInOrAdd()"></i>
+						<i class="fa fa-plus" id="plus" onclick="addPark()"></i>
 						<i class="fa fa-bars" id="bars" onclick="userMenu()"></i>
 					</div>
 				</div>
@@ -38,9 +38,15 @@
 				<div id="browse_text" style="font-family: Karla">Browse neighborhoods</div>
 			</div>
 			<div id="menu">
-				<div id="report_btn"></div>
-				<div id="logout_btn"></div>
-				<div id="account_btn"></div>
+				<div id="account_btn" onclick="window.location.href = 'account.html'">
+					<div id="account_text" style="font-family: Karla">Account Settings</div>
+				</div>
+				<div id="logout_btn" onclick="logout()">
+					<div id="logout_text" style="font-family: Karla">Logout</div>
+				</div>
+				<div id="report_btn" onclick="window.location.href = 'report.html'">
+					<div id="report_text" style="font-family: Karla">Report a Problem</div>
+				</div>
 			</div>
 		</div>
 	</body>

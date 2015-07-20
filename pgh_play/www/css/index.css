@@ -176,3 +176,66 @@
 	z-index: 1;
 	background-color: #0E6F48;
 }
+
+#account_btn {
+	position: absolute;
+	top: 5%;
+	right: 6.5%;
+	height: 6%;
+	width: 85%;
+	z-index: 1;
+    border-width: 2px;	
+    border-style: solid;
+	border-color: #CADEC3;
+}
+
+#account_text {
+	position: absolute;
+	top: 20%;
+	right: 5%;
+	color: #AFCF9F;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+#logout_btn {
+	position: absolute;
+	top: 15%;
+	right: 6.5%;
+	height: 6%;
+	width: 85%;
+	z-index: 1;
+    border-width: 2px;	
+    border-style: solid;
+	border-color: #CADEC3;
+}
+
+#logout_text {
+	position: absolute;
+	top: 20%;
+	right: 60%;
+	color: #AFCF9F;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+#report_btn {
+	position: absolute;
+	top: 25%;
+	right: 6.5%;
+	height: 6%;
+	width: 85%;
+	z-index: 1;
+    border-width: 2px;	
+    border-style: solid;
+	border-color: #CADEC3;
+}
+
+#report_text {
+	position: absolute;
+	top: 20%;
+	right: 5%;
+	color: #AFCF9F;
+	font-size: 100%;
+	font-weight: bold;
+}

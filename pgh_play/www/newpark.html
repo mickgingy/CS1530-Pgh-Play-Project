@@ -1,24 +1,83 @@
 <html>
-<body>
-<H1> New Park entry </H1><br>
-<body>
-
-Park Name:      <input type="text" id="name"><br>
-Address:           <input type="text" id="address"></br>
-Zip code:           <input type="text" id="zip"><br>
-Neighborhood: <input type="text" id="neighborhood"><br>
-Rating:               <input type="text" id="rating"><br>
-Good for <br>
-Infants:     <input type="checkbox" id="infants"><br>
-Toddlers: <input type="checkbox" id="toddlers"><br>
-5-8:           <input type="checkbox" id="5-8"><br>
-9-12:        <input type="checkbox" id="9-12"><br>
-Comments: <br><textarea id="comment"  rows=4 cols=30></textarea>
-<input type="button" id="enter" value="Enter"><br><br>
-
-
-<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-<script src="newpark.js"></script>
-
-</body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/newpark.css">
+		<link rel="stylesheet" type="text/css" href="css/container_header.css">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Karla">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+		<script src="newpark.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<div class="left">
+					<div class="l1">
+						<i class="fa fa-chevron-left" id="backward" onclick="window.location.href = 'index.html'"></i>
+					</div>
+					<div class="l2">
+						<p id="title">PGH PLAY PROJECT</p>
+					</div>
+				</div>
+			</div>
+			<div id="addpark">Add A Park!</div>
+			<div id="pname">
+				<input type="text" id="name" placeholder="Park name" class="input">
+			</div>
+			<div id="paddress">
+				 <input type="text" id="address" placeholder="Park address" class="input">
+			</div>
+			<div id="phood">
+				<input type="text" id="neighborhood" placeholder="Neighborhood" class="input">
+			</div>
+			<form id="big_form">
+				<div id="pattributes">
+					<div id="l_attributes">
+						FACILITIES:
+						<br><input type="checkbox" name="attr" value="playground">Playground</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="picnic">Picnic Tables</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="grills">Grills</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="track">Walking Track</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="soccer">Soccer Fields</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="baseball">Baseball Fields</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="hocket">Street Hockey Court</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="pool">Pool</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="babypool">Baby Pool</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="basketball">Basketball Courts</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="pavilion">Pavilions</input type="checkbox">
+					</div>
+					<div id="r_attributes">
+						NEARBY:
+						<br><input type="checkbox" name="attr" value="coffee">Coffee</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="groceries">Groceries</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="restaurants">Restaurants</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="wireless">Wireless</input type="checkbox">
+						<br><input type="checkbox" name="attr" value="shopping">Shopping</input type="checkbox">
+					</div>
+				</div>
+				<div id="whatisitgoodfor">
+					<br><input type="checkbox" name="attr" value="infants">Good for Infants?</input type="checkbox">
+					<br><input type="checkbox" name="attr" value="toddlers">Good for Toddlers?</input type="checkbox">
+					<br><input type="checkbox" name="attr" value="5-8">Good for 5-8?</input type="checkbox">
+					<br><input type="checkbox" name="attr" value="9-12">Good for 9-12?</input type="checkbox">
+					<br><input type="checkbox" name="attr" value="universal">Is it a Universal Playground?</input type="checkbox">
+				</div>
+			</form>
+			<div id="rating_div">
+				<p id="rate_text">RATE THIS PARK:</p>
+				<div class="rating">
+				    <span><br><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
+				    <span><br><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
+				    <span><br><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
+				    <span><br><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
+				    <span><br><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
+				</div>
+			</div><br><br><br>
+			<div id="upload">
+				<button>Upload A Picture</button>
+			</div>
+			<div id="submit">
+				<button>Submit</button>
+			</div>
+		</div>
+	</body>
 </html>

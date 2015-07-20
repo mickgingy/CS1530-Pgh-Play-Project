@@ -1,9 +1,7 @@
 // PGH Play project
 // new park entry script
 // enter information about the park into the db and populate tables via newpark.hml
-
-$(document).ready(function(){
-
+$(document).ready(function() {
 	$('input#enter').on('click', function() {
 			// create variables from html elements
 			var name = $('#name').val();
@@ -42,7 +40,23 @@ $(document).ready(function(){
 			}
 			var comment = $('textarea#comment').val();
 			
+		//
 			
+	    $(".rating input:radio").attr("checked", false);
+	       $('.rating input').click(function () {
+	           $(".rating span").removeClass('checked');
+	           $(this).parent().addClass('checked');
+	       });
+
+	       $('input:radio').change(
+	       function(){
+	           var userRating = this.value;
+	           alert(userRating);
+	       }); 
+		  
+		 //
+		
+		
 		var obj = {	"name" : name,
 		"address" : address,
 		"zip" : zip,

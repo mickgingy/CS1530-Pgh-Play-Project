@@ -1,3 +1,8 @@
+@font-face {
+	font-family: Karla;
+	src: url(http://fonts.googleapis.com/css?family=Karla);
+}
+
 #container {
 	height: 103.5%;
 	width: 104%;
@@ -28,7 +33,7 @@
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 120%;
 	font-weight: bold;
-	padding-left: 4%;
+	margin-left: 4%;
 }
 
 .left {
@@ -43,10 +48,12 @@
 
 .l1 {
 	float: left;
+	height: 100%;
 }
 
 .l2 { 
 	float: left;
+	width: 80%;
 }
 
 .r {
@@ -61,11 +68,4 @@
 #bars {
 	font-size: 22;
 	margin-left: 20%;
-}
-
-#login {
-	height: 91%;
-	width: 100%;
-	overflow: hidden;
-	background-color: white;
 }
