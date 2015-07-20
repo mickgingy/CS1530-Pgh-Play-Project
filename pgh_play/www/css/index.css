@@ -1,8 +1,9 @@
 #container {
-	height: 660;
-	width: 370;
+	height: 103.5%;
+	width: 104%;
+	top: -2%;
+	left: -2%;
 	position: relative;
-	overflow: hidden;
 }
 
 #header {
@@ -65,13 +66,16 @@
 #find_text {
 	font-size: 150%;
 	font-weight: bold;
-	padding-top: 10%;
+	top: 10%;
+	position: relative;
 }
 
 #find_button {
 	background-color: #5CB056;
 	height: 15%;
 	width: 61%;
+	min-height: 54px;
+	min-width: 240px;
 	position: absolute;
 	top: 68%;
 	left: 20%;
@@ -90,7 +94,7 @@
 #location_icon {
 	position: absolute;
 	font-size: 20;
-	top: 70%;
+	top: 72%;
 	left: 23%;
 	z-index: 1;
 }
@@ -157,7 +161,8 @@
 #browse_text {
 	font-size: 150%;
 	font-weight: bold;
-	padding-top: 10%;
+	top: 10%;
+	position: relative;
 	color: white;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
@@ -170,4 +175,67 @@
 	width: 40%;
 	z-index: 1;
 	background-color: #0E6F48;
+}
+
+#account_btn {
+	position: absolute;
+	top: 5%;
+	right: 6.5%;
+	height: 6%;
+	width: 85%;
+	z-index: 1;
+    border-width: 2px;	
+    border-style: solid;
+	border-color: #CADEC3;
+}
+
+#account_text {
+	position: absolute;
+	top: 20%;
+	right: 5%;
+	color: #AFCF9F;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+#logout_btn {
+	position: absolute;
+	top: 15%;
+	right: 6.5%;
+	height: 6%;
+	width: 85%;
+	z-index: 1;
+    border-width: 2px;	
+    border-style: solid;
+	border-color: #CADEC3;
+}
+
+#logout_text {
+	position: absolute;
+	top: 20%;
+	right: 60%;
+	color: #AFCF9F;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+#report_btn {
+	position: absolute;
+	top: 25%;
+	right: 6.5%;
+	height: 6%;
+	width: 85%;
+	z-index: 1;
+    border-width: 2px;	
+    border-style: solid;
+	border-color: #CADEC3;
+}
+
+#report_text {
+	position: absolute;
+	top: 20%;
+	right: 5%;
+	color: #AFCF9F;
+	font-size: 100%;
+	font-weight: bold;
 }

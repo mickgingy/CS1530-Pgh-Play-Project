@@ -58,36 +58,37 @@ function sendLocation() {
 /**
  *	function logInOrAdd()
  *
- *	Under Construction
+ *	A simple function that checks if the "user" cookie exists, then either redirects to the user login
+ * 	page or the new park page.
  */
-function logInOrAdd() {
-    // If user cookie already exists
-	if (document.cookie.indexOf("user") >= 0) {
-		window.location.href = "newpark.html";
-	}
-	else {
+function addPark() {
+	if (document.cookie.indexOf("user") < 0) {
 		window.location.href = "pghlogin.html";
 	}
-	
+	else {
+		window.location.href = "newpark.html";
+	}
 }
 
-// 
+// Boolean variable to determine whether or not the user menu has been moved.
 var moved = false;
 
 /**
  *	function userMenu()
  *
- *	Under Construction
+ *	Checks to see if the "user" cookie exists, if not returning the user to the login page, and if so
+ *	moving the #menu div based on whether or not it has already been moved.
  */
 function userMenu() {
-	if (moved) {
+	if (document.cookie.indexOf("user") < 0) {
+		window.location.href = "pghlogin.html";
+	}
+	else if (moved) {
 		$('#menu').animate({right: "-40%"}, 200);
-		// $('.options').animate({left: "-210px"}, 200);
 		moved = false;
 	}
 	else {
 		$('#menu').animate({right: "0%"}, 200);
-		// $('.options').animate({left: "0px"}, 200);
 		moved = true;
 	}
 }

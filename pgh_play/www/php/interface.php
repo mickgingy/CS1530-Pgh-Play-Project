@@ -71,20 +71,20 @@ function create_new() {
 function login() {
 	global $db;
 	connect();
-	$pass = hash('sha256', rtrim($_POST["pw"]));
+	$pass = hash('sha256', rtrim($_POST["password"]));
 	// verify username and password match
-	$query = "SELECT * FROM users  WHERE user='{$_POST['username']}' && password='$pass'";
+	$query = "SELECT * FROM users WHERE user='{$_POST['username']}' && password='$pass'";
 	$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 	$pws = $result->fetch_all(MYSQLI_ASSOC);
-	if ($result->num_rows ==1)
+	if ($result->num_rows == 1)
 	{
 		// store session var and go to browse.html
 		$_SESSION['user'] = $_POST['username'];
-		header('Location: http://localhost:8666/browse.html');
+		echo "success";
 	}
 	else
 	{
-		header('Location: http://localhost:8666/PGHlogin.html');
+		echo "failure";
 	}
 }
 
