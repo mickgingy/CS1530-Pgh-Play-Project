@@ -40,6 +40,11 @@
 	color: white;
 	border: 1px solid lightgray;
 	font-size: 150%;
+	width: 71.5%;
+	height: 11.5%;
+	position: relative;
+	left: 14%;
+	line-height: 290%;
 }
 
 .login_text {

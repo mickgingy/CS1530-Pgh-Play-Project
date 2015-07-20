@@ -24,10 +24,10 @@
 			<div id="login" style="font-family: Karla">
 				<form action="php/PGHLogin.php" method="post" id="form">
 					<p class="login_text">Login</p>
-					<input type="text" name="username" id="email" placeholder="Email address" class="input"><br>
+					<input type="text" name="email" id="email" placeholder="Email address" class="input"><br>
 					<input type="password" name="password" id="password" placeholder="Password" class="input"><br>
 					<button id="submit_btn" value="Enter" onclick="login();" class="input">Go!</button><br>
-					<button id="new_user" class="input">New User?</button>
+					<div id="new_user" onclick="window.location.href = 'newuser.html'">New User?</div>
 				</form>
 			</div>
 		</div>
