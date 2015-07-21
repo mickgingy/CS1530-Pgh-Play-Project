@@ -2,7 +2,7 @@
 // new park entry script
 // enter information about the park into the db and populate tables via newpark.hml
 $(document).ready(function() {
-	$('input#enter').on('click', function() {
+	$("#sub_btn").on('click', function() {
 			// create variables from html elements
 			var name = $('#name').val();
 			var address = $('#address').val();
@@ -11,7 +11,7 @@ $(document).ready(function() {
 			var rating = $('#rating').val();
 			
 			// if infant is checked
-			if($("#infants").is(':checked')){
+ /*			if($("#infants").is(':checked')){
 				var infants = "yes";
 			}
 			else {
@@ -38,9 +38,10 @@ $(document).ready(function() {
 			else {
 				var nine_twelve = "no";
 			}
+	*/
 			var comment = $('textarea#comment').val();
 			
-		//
+		
 			
 	    $(".rating input:radio").attr("checked", false);
 	       $('.rating input').click(function () {
@@ -61,26 +62,86 @@ $(document).ready(function() {
 		"address" : address,
 		"zip" : zip,
 		"neighborhood" : neighborhood, 
-		"infant_safe" : infants,
-		"toddler_safe" : toddlers,
-		"five_eight_safe" : five_eight,
-		"nine_twelve_safe" : nine_twelve,
+		"infant_safe" : $('#infants').is(':checked'),
+		"toddler_safe" : $('#toddlers').is(':checked'),
+		"five_eight_safe" : $('#5-8').is(':checked'),
+		"nine_twelve_safe" : $('#9-12').is(':checked'),
+		"universal_safe" : $('#universal').is(':checked'),
 		attributes : [
 			{	"attribute_id" : 1,
-				"attribute_name" : "Swingset"
+				"attribute_name" : "Playground",
+				"attribute_checked": $('#playground').is(':checked')
 			},
 			{	"attribute_id" : 2,
-				"attribute_name" : "Grill"
+				"attribute_name" : "Picnic Tables",
+				"attribute_checked": $('#picnic').is(':checked')
+			},
+			{	"attribute_id" : 3,
+				"attribute_name" : "Grills",
+				"attribute_checked": $('#grills').is(':checked')
+			},
+			{	"attribute_id" : 4,
+				"attribute_name" : "Walking Track",
+				"attribute_checked": $('#track').is(':checked')
+			},
+			{	"attribute_id" : 5,
+				"attribute_name" : "Soccer Fields",
+				"attribute_checked": $('#soccer').is(':checked')
+			},
+			{	"attribute_id" : 6,
+				"attribute_name" : "Baseball Fields",
+				"attribute_checked": $('#baseball').is(':checked')
+			},
+			{	"attribute_id" : 7,
+				"attribute_name" : "Street Hockey Court",
+				"attribute_checked": $('#hockey').is(':checked')
+			},
+			{	"attribute_id" : 8,
+				"attribute_name" : "Pool",
+				"attribute_checked": $('#pool').is(':checked')
+			},
+			{	"attribute_id" : 9,
+				"attribute_name" : "Baby Pool",
+				"attribute_checked": $('#babypool').is(':checked')
+			},
+			{	"attribute_id" : 10,
+				"attribute_name" : "Basketball Courts",
+				"attribute_checked": $('#basketball').is(':checked')
+			},
+			{	"attribute_id" : 11,
+				"attribute_name" : "Pavilions",
+				"attribute_checked": $('#paviolion').is(':checked')
+			}
+		],
+		nearby : [
+			{ 
+				"name" : "Coffee",
+				"checked" : $('#coffee').is(':checked')
+			},
+			{ 
+				"name" : "Groceries",
+				"checked" : $('#groceries').is(':checked')
+			},
+			{ 
+				"name" : "Restaurants",
+				"checked" : $('#restaurants').is(':checked')
+			},
+			{ 
+				"name" : "Wireless",
+				"checked" : $('#wireless').is(':checked')
+			},
+			{ 
+				"name" : "Shopping",
+				"checked" : $('#shopping').is(':checked')
 			}
 		]
 	};
 	alert(obj.name);
 			// post to server to store information
-			$.post('newpark.php',{obj:JSON.stringify(obj)}, function(data){
+			$.post('php/newpark.php',{obj:JSON.stringify(obj)}, function(data){
 				alert(data);
 			
 			});
-		
 	 });
 
 
