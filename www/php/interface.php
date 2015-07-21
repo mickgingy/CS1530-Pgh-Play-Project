@@ -210,6 +210,67 @@ function get_parks(){
 }
 
 /*
+	Returns a list of parks in the system by gps coordinate
+	Parameters:
+		GET : long
+		GET : lat
+		GET : zoom
+	Returns:
+		&$ delimited list of parks
+		OR
+		JSON encoded array of parks
+*/
+function get_parks_by_gps(){
+	global $db;
+	global $delim_output;
+	connect();
+	
+	//Check if the zip parameter was sent
+	if(isset($_GET['long']) && isset($_GET['lat']) && isset($_GET['zoom'])){
+		$query = "SELECT * FROM parks WHERE zip_code={$_GET['zip']}";
+	}else{
+		die("{\"error\":\"Missing parameter: zip\"}");
+	}
+	$result = $db->query($query);
+	$row = $result->fetch_array();
+	$results = array();
+	//Iterate over each row returned from query
+	while($row != NULL){
+		//Clear the previous values of the row entry
+		if(isset($r_row))
+			unset($r_row);
+		//Push necessary items into the $r_row variable
+		$r_row['park_id'] = $row['park_id'];
+		$r_row['park_name'] = $row['name'];
+		$r_row['park_address'] = $row['address'];
+		$r_row['zip_code'] = $row['zip_code'];
+		$r_row['neighborhood'] = $row['neighborhood'];
+		//Add it to the results
+		$results[] = $r_row;
+		$row = $result->fetch_array();
+	}
+	
+	//Format the results in the appropriate method (see $delim_output)
+	if($delim_output){
+		//Output using the $ & method
+		$output = "";
+		foreach($results as $val){
+			foreach($val as $k => $v){
+				$output = $output . "$k&$v&";
+			}
+			$output = rtrim($output, '&') . '$';
+		}
+		$output = rtrim($output, '$');
+	}else{
+		//Output using JSON
+		$output = json_encode($results);
+	}
+	
+	echo $output;
+	return $results;
+}
+
+/*
 	Returns a list of parks in the system by neighborhood
 	Parameters:
 		GET : neighborhood
