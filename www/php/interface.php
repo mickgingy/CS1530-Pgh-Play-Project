@@ -473,7 +473,7 @@ function get_park_info(){
 			$row = $result->fetch_array();
 			$output['rating'] = $row['star'];
 			$output['num_ratings'] = $row['num'];
-			$result = $db->query("SELECT * FROM attributes, ParkAttributes WHERE attributes.attribute_id = ParkAttributes.attribute_id AND park_id=$p_id");
+			$result = $db->query("SELECT * FROM attributes, ParkAttributes WHERE attributes.attribute_id = ParkAttributes.attribute_id AND park_id=$p_id AND nearby = 0");
 			$row = $result->fetch_array();
 			$i = 0;
 			while(row != NULL){
@@ -482,6 +482,17 @@ function get_park_info(){
 				$i++;
 				$row = $result->fetch_array();	
 			}
+			
+			$result = $db->query("SELECT * FROM attributes, ParkAttributes WHERE attributes.attribute_id = ParkAttributes.attribute_id AND park_id=$p_id AND nearby = 1");
+			$row = $result->fetch_array();
+			$i = 0;
+			while(row != NULL){
+				$output['nearby'][$i]['attribute_id'] = $row['attribute_id'];
+				$output['nearby'][$i]['attribute_name'] = $row['attribute'];
+				$i++;
+				$row = $result->fetch_array();	
+			}
+			
 		}
 		
 		echo json_encode($output);
