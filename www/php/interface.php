@@ -47,9 +47,14 @@ function create_new() {
 		//return false;
 	else:
 		//echo "dne"; // User does not exist
+		// get date user became a member
+		$t=time();
+		echo($t . "<br>");
+		$date = date("m-d-Y",$t);
+		
 		$pass = hash('sha256', rtrim($_POST["pw"]));
 		// hash password and enter new user into DB
-		$query = "INSERT INTO users (email, name, password) VALUES  ('{$_POST['email']}', '{$_POST['name']}', '$pass')";
+		$query = "INSERT INTO users (email, name, password, date) VALUES  ('{$_POST['email']}', '{$_POST['name']}', '$pass', '$date')";
 		$result = $db->query($query) or trigger_error(mysql_error()." ".$query);
 		echo $result;
 		//return true;
@@ -178,6 +183,66 @@ function get_parks(){
 		$r_row['park_name'] = $row['name'];
 		$r_row['park_address'] = $row['address'];
 		$r_row['zip_code'] = $row['zip_code'];
+		$r_row['neighborhood'] = $row['neighborhood'];
+		//Add it to the results
+		$results[] = $r_row;
+		$row = $result->fetch_array();
+	}
+	
+	//Format the results in the appropriate method (see $delim_output)
+	if($delim_output){
+		//Output using the $ & method
+		$output = "";
+		foreach($results as $val){
+			foreach($val as $k => $v){
+				$output = $output . "$k&$v&";
+			}
+			$output = rtrim($output, '&') . '$';
+		}
+		$output = rtrim($output, '$');
+	}else{
+		//Output using JSON
+		$output = json_encode($results);
+	}
+	
+	echo $output;
+	return $results;
+}
+
+/*
+	Returns a list of parks in the system by neighborhood
+	Parameters:
+		GET : neighborhood
+	Returns:
+		&$ delimited list of parks
+		OR
+		JSON encoded array of parks
+*/
+function get_parks_by_neighborhood(){
+	global $db;
+	global $delim_output;
+	connect();
+	
+	//Check if the zip parameter was sent
+	if(isset($_GET['neighborhood'])){
+		$query = "SELECT * FROM parks WHERE neighborhood={$_GET['neighborhood']}";
+	}else{
+		die("{\"error\":\"Missing parameter: zip\"}");
+	}
+	$result = $db->query($query);
+	$row = $result->fetch_array();
+	$results = array();
+	//Iterate over each row returned from query
+	while($row != NULL){
+		//Clear the previous values of the row entry
+		if(isset($r_row))
+			unset($r_row);
+		//Push necessary items into the $r_row variable
+		$r_row['park_id'] = $row['park_id'];
+		$r_row['park_name'] = $row['name'];
+		$r_row['park_address'] = $row['address'];
+		$r_row['zip_code'] = $row['zip_code'];
+		$r_row['neighborhood'] = $row['neighborhood'];
 		//Add it to the results
 		$results[] = $r_row;
 		$row = $result->fetch_array();
@@ -217,13 +282,40 @@ Parameters:
 		"nine_twelve_safe" : "true|false|1|0",
 		attributes : [
 			{	"attribute_id" : 1,
-				"attribute_name" : "Swingset"
+				"attribute_name" : "Playground"
 			},
 			{	"attribute_id" : 2,
-				"attribute_name" : "Grill"
+				"attribute_name" : "Picnic Tables"
 			},
-			...
+			{	"attribute_id" : 3,
+				"attribute_name" : "Grills"
+			},
+			{	"attribute_id" : 4,
+				"attribute_name" : "Walking Track"
+			},
+			{	"attribute_id" : 5,
+				"attribute_name" : "Soccer Fields"
+			},
+			{	"attribute_id" : 6,
+				"attribute_name" : "Baseball Fields"
+			},
+			{	"attribute_id" : 7,
+				"attribute_name" : "Street Hockey Court"
+			},
+			{	"attribute_id" : 8,
+				"attribute_name" : "Pool"
+			},
+			{	"attribute_id" : 9,
+				"attribute_name" : "Baby Pool"
+			},
+			{	"attribute_id" : 10,
+				"attribute_name" : "Basketball Courts"
+			},
+			{	"attribute_id" : 11,
+				"attribute_name" : "Pavilions"
+			}
 		]
+
 	}
 Returns:
 	JSON encoded object containing park information
@@ -240,7 +332,8 @@ function new_park(){
 	$obj = json_decode($_POST['obj'], true);
 	$name = $obj['name'];
 	$address = $obj['address'];
-	$zip = $obj['zip'];
+	// hack for now... zip code is not given so I'm putting this as temp
+	$zip = "15213";
 	if(isset($obj['infant_safe']))
 		$infant_safe = $obj['infant_safe'];
 	else
