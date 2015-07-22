@@ -29,17 +29,68 @@ function getParkInfo(name){
 	ajax.onreadystatechange = function() {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			park_info = JSON.parse(ajax.responseText);
-			var div = document.getElementById("park_details");
-			div.innerHTML += "Park Name: " +park_info.name + "</br>";
-			div.innerHTML += "Address: " + park_info.address + "</br>";
-			div.innerHTML += "Neighborhood: " + park_info.neighborhood + "</br>";
+			document.getElementById('park_name').innerHTML = park_info.name;
+			document.getElementById('park_addr').innerHTML = park_info.address;
+			document.getElementById('park_hood').innerHTML = park_info.neighborhood;
 			
-			$('#park_name_text').val(park_info.park_name);
-			$('#park_addr_text').val(park_info.park_address);
+			for (var i = 0; i < park_info.attributes.length; i++) {
+				var attr = document.createElement('p');
+				attr.innerHTML = park_info.attributes[i];
+				$('#l_attributes').append(input);
+			}
+			
+			for (var i = 0; i < park_info.nearby.lenth; i++) {
+				var attr = document.createElement('p');
+				attr.innerHTML = park_info.nearby[i];
+				$('#r_attributes').append(attr);
+			}
+			
+			var rp = document.createElement('p');
+			rp.innerHTML = "Yes";
+			
+			var check = document.createElement('i');
+			check.addClass = "fa fa-check";
+			
+			var r_div = document.createElement('div');
+			r_div.append(rp);
+			r_div.append(check);
+			
+			if (park_info.infant_safe) {
+				var lp = document.createElement('p');
+				lp.innerHTML = "Good for Infants";
+				$('l_goodfor').append(lp);
+				$('r_goodfor').append(r_div);
+			}
+			
+			if (park_info.toddler_safe) {
+				var lp = document.createElement('p');
+				lp.innerHTML = "Good for Toddlers";
+				$('l_goodfor').append(lp);
+				$('r_goodfor').append(r_div);
+			}
+			
+			if (park_info.five_eight_safe) {
+				var lp = document.createElement('p');
+				lp.innerHTML = "Good for 5-8";
+				$('l_goodfor').append(lp);
+				$('r_goodfor').append(r_div);
+			}
+			
+			if (park_info.nine_twelve_safe) {
+				var lp = document.createElement('p');
+				lp.innerHTML = "Good for 9-12";
+				$('l_goodfor').append(lp);
+				$('r_goodfor').append(r_div);
+			}
+			
+			if (park_info.universal_safe) {
+				var lp = document.createElement('p');
+				lp.innerHTML = "<br>Park is a Universal Playground";
+				$('l_goodfor').append(lp);
+				$('r_goodfor').append(r_div);
+			}
+			
 			makeMap(park_info.gpslat, park_info.gpslong);
-			/*
-				Output other values
-			*/
 		}
 	}
 	

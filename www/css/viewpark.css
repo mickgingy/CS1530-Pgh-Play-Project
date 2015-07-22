@@ -14,11 +14,18 @@
 	background-color: #85CF61;
 }
 
-#park_addr {
+#park_addr, #park_hood {
 	height: 5%;
 	width: 100%;
 	color: #85CF61;
+}
+
+#park_addr {
 	background-color: #AFCF9F;
+}
+
+#park_hood {
+	background-color: #CADEC3;
 }
 
 #pattributes {
