@@ -24,11 +24,16 @@ function initialize() {
 
 var park_info;
 
-function getParkInfo(){
+function getParkInfo(name){
 	ajax = new XMLHttpRequest();
 	ajax.onreadystatechange = function() {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			park_info = JSON.parse(ajax.responseText);
+			var div = document.getElementById("park_details");
+			div.innerHTML += "Park Name: " +park_info.name + "</br>";
+			div.innerHTML += "Address: " + park_info.address + "</br>";
+			div.innerHTML += "Neighborhood: " + park_info.neighborhood + "</br>";
+			
 			$('#park_name_text').val(park_info.park_name);
 			$('#park_addr_text').val(park_info.park_address);
 			makeMap(park_info.gpslat, park_info.gpslong);

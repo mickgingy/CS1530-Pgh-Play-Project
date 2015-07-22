@@ -56,15 +56,13 @@ function addToList(name, isHood) {
 	var newDiv = document.createElement('div');
 	newDiv.className = 'listElement';
 	newDiv.innerHTML = name;
-	
+	newDiv.id = name;
 	if (isHood == true) {
 		newDiv.id = 'hood';
 	}
 	else {
 		newDiv.id = 'park';
-		newDiv.onclick = (function () {
-			goToParkPage(name);
-		});
+		newDiv.onclick = function() { goToParkPage(name);  };
 	}
 
 	$('#TheList').append(newDiv);

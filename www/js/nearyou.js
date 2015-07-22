@@ -4,7 +4,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 var gpslat;
 var gpslong;
 var map;
-var parks;
+var parks = [];
 $.ajaxSetup({ cache: false });
 //var lat;
 //var lng;
@@ -119,19 +119,6 @@ function makeMap(lat, lng) {
 		}
 	]);
 	
-	ajaxCall(lat, lng);
-	
-	addMarker(map, lat, lng);
-}
-
-/**
- *	function ajaxCall()
- *
- *	Wrapper function for the Database AJAX calls.
- *	Params: lat and lng coordinates
- */
-function ajaxCall(gpslat, gpslong) {
-	
 	if ((zip_code = localStorage.getItem("zip_code")) != null) {
 		ajax = new XMLHttpRequest();
 		ajax.onreadystatechange = function() {
@@ -183,6 +170,19 @@ function ajaxCall(gpslat, gpslong) {
 		ajax.open("GET", "http://54.163.175.56/pgh/pghgetparksbygps.php?" + data, true);
 		ajax.send();
 	}
+	
+	addMarker(map, lat, lng);
+}
+
+/**
+ *	function ajaxCall()
+ *
+ *	Wrapper function for the Database AJAX calls.
+ *	Params: lat and lng coordinates
+ */
+function ajaxCall(gpslat, gpslong) {
+	
+	
 }
 
 /**

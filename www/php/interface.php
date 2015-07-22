@@ -429,23 +429,23 @@ function new_park(){
 	$gpslong = $obj['gpslong'];
 	$gpslat = $obj['gpslat'];
 	$zip = $obj['zip'];
-	if(isset($obj['infant_safe']))
+	if($obj['infant_safe'] == 1)
 		$infant_safe = $obj['infant_safe'];
 	else
 		$infant_safe = 0;
-	if(isset($obj['toddler_safe']))
+	if($obj['toddler_safe'] == 1)
 		$toddler_safe = $obj['toddler_safe'];
 	else
 		$toddler_safe=0;
-	if(isset($obj['five_eight_safe']))
+	if($obj['five_eight_safe'] == 1)
 		$five_eight_safe = $obj['five_eight_safe'];
 	else
 		$five_eight_safe = 0;
-	if(isset($obj['nine_twelve_safe']))
+	if($obj['nine_twelve_safe'] == 1)
 		$nine_twelve_safe = $obj['nine_twelve_safe'];
 	else
 		$nine_twelve_safe = 0;
-	if(isset($obj['universal_safe']))
+	if($obj['universal_safe'] == 1)
 		$universal = $obj['universal_safe'];
 	else
 		$universal = 0;
@@ -458,13 +458,13 @@ function new_park(){
 	if(isset($obj['attributes'])){
 		foreach($obj['attributes'] as $attribute){
 			if($attribute['attribute_checked'] == 1)
-				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 0}))");
+				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 0))");
 		}
 	}
 	if(isset($obj['nearby'])){
 		foreach($obj['nearby'] as $attribute){
 			if($attribute['checked'] == 1)
-				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 1}))");
+				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 1))");
 		}
 	}
 }
@@ -500,29 +500,31 @@ function get_park_info(){
 	if(isset($_GET['name'])){
 		$p_name = $_GET['name'];
 		$output = array();
-		$result = $db->query("SELECT * FROM Parks WHERE name = $p_name");
+		$result = $db->query("SELECT * FROM parks WHERE name = '$p_name'");
 		$row = $result->fetch_array();
 		if($row == NULL){
 			die("{\"error\":\"Invalid park name\"}");
 		}else{
 			$output['name'] = $row['name'];
 			$output['park_id'] = $row['park_id'];
+			$p_id = $row['park_id'];
 			$output['address'] = $row['address'];
 			$output['zip'] = $row['zip_code'];
 			$output['neighborhood'] = $row['neighborhood'];
-			$output['infant_safe'] = $row['infant'];
+			$output['infant_safe'] = $row['infants'];
 			$output['toddler_safe'] = $row['toddlers'];
 			$output['five_eight_safe'] = $row['five'];
 			$output['nine_twelve_safe'] = $row['nine'];
-			$output['universal_safe'] = $row['universal'];
-			$result = $db->query("SELECT AVERAGE(rating) as star, COUNT(rating) as num FROM comments WHERE park_id=$p_id");
+			if(isset($row['universal']))
+				$output['universal_safe'] = $row['universal'];
+			$result = $db->query("SELECT AVG(rating) as star, COUNT(rating) as num FROM comments WHERE park_id=$p_id");
 			$row = $result->fetch_array();
 			$output['rating'] = $row['star'];
 			$output['num_ratings'] = $row['num'];
 			$result = $db->query("SELECT * FROM attributes, ParkAttributes WHERE attributes.attribute_id = ParkAttributes.attribute_id AND park_id=$p_id AND nearby = 0");
 			$row = $result->fetch_array();
 			$i = 0;
-			while(row != NULL){
+			while($row != NULL){
 				$output['attributes'][$i]['attribute_id'] = $row['attribute_id'];
 				$output['attributes'][$i]['attribute_name'] = $row['attribute'];
 				$i++;
@@ -532,7 +534,7 @@ function get_park_info(){
 			$result = $db->query("SELECT * FROM attributes, ParkAttributes WHERE attributes.attribute_id = ParkAttributes.attribute_id AND park_id=$p_id AND nearby = 1");
 			$row = $result->fetch_array();
 			$i = 0;
-			while(row != NULL){
+			while($row != NULL){
 				$output['nearby'][$i]['attribute_id'] = $row['attribute_id'];
 				$output['nearby'][$i]['attribute_name'] = $row['attribute'];
 				$i++;
