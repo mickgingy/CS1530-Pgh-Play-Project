@@ -26,8 +26,10 @@ var main = function() {
 				a.onreadystatechange = function() {
 					if (a.readyState == 4 && a.status == 200) {
 						var obj = JSON.parse(a.responseText);
-						// Add the park to the list
-						addToList(obj, false);
+						var j;
+						for(j = 0; j < obj.length; j++){
+							addToList(obj[j].park_name, false);
+						}
 					}
 				}
 				a.open("GET", "http://54.163.175.56/pgh/pghgetparksbyneighborhood.php?neighborhood=" + response[i], false);
