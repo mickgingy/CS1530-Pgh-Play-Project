@@ -92,15 +92,75 @@
 			$this->assertNotNull(get_parks());
 		}
 		
-		//
-		// NOT YET IMEPLEMENTED FUNCTIONS
-		//
-		/*public function testAddComment(){
-			$park_id = 1;
-			$comment = 'this is a new comment';
+		
+		//If the get_parks_by_gps() function properly works, a non-empty JSON encoded list will be echo-ed.
+		public function testGetParksByGPSJSON(){
+			global $delim_output;
+			$delim_output = false;
+			ob_start();
+			$_GET['gpslong'] = -80;
+			$_GET['gpslat'] = 40;
+			$_GET['zoom'] = 1;
+			get_parks_by_gps();
+			$output = ob_get_contents();
+			ob_end_clean();
+			
+			//The output should not be null.
+			assertNotNull($output);
+		}
+		
+		//Test to ensure that the get_parks_by_gps() function works with non-numeric input
+		public function testGetParksGPSNonNumericInput(){
+			$_GET['gpslong'] = "hi there";
+			$_GET['gpslat'] = "how you like";
+			$_GET['zoom'] = "these tests?";
+			assertNotNull(get_parks_by_gps());
+		}
+		
+		//If the get_parks_by_gps() function properly works, a non-null variable (nested array) should be returned.
+		public function testGetParksGPSNotNull(){
+			$_GET['gpslong'] = -80;
+			$_GET['gpslat'] = 40;
+			$_GET['zoom'] = 1;
+			$this->assertNotNull(get_parks_by_gps());
+		}
+		
+		
+		
+		//If the get_parks_by_neighborhood() function properly works, a non-empty JSON encoded list will be echo-ed.
+		public function testGetParksByNeighborhoodJSON(){
+			global $delim_output;
+			$delim_output = false;
+			ob_start();
+			$_GET['neighborhood'] = 'hi';
+			get_parks_by_neighborhood();
+			$output = ob_get_contents();
+			ob_end_clean();
+			
+			//The output should not be null.
+			assertNotNull($output);
+		}
+		
+		//Test to ensure that the get_parks_by_neighborhood() function works with numeric input
+		public function testGetParksByNeighborhoodNumericInput(){
+			$_GET['neighborhood'] = 10;
+			assertNotNull(get_parks_by_neighborhood());
+		}
+		
+		//If the get_parks_by_neighborhood() function properly works, a non-null variable (nested array) should be returned.
+		public function testGetParksByNeighborhoodNotNull(){
+			$_GET['neighborhood'] = 'hi';
+			$this->assertNotNull(get_parks_by_neighborhood());
+		}
+		
+		public function testAddComment(){
+			$_POST['park_id'] = 1;
+			$_POST['comment'] = 'this is a new comment';
+			$_POST['user_id'] = 1;
+			$_POST['star_rating'] = 5;
 			$a = getDetailedParkInfo($park_id);
 			//Under assumption of anonymous commenting
-			addComment($park_id, $comment);
+			add_comment();
 			$a = getDetailedParkInfo($park_id);
 			$b = $a->getComments();
 			$this->assertTrue(in_array($comment, $b));
@@ -110,7 +170,7 @@
 			//Assume park with park id = 1
 			$a = getDetailedParkInfo(1);
 			$this->assertNotNull($a);
-		}*/
+		}
 		
 	}
 

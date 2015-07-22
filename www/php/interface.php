@@ -611,6 +611,7 @@ function get_comments(){
 			$row = $result->fetch_array();	
 		}
 		echo json_encode($output);
+		return $output;
 	}else{
 		die("{\"error\":\"Missing parameter: park_id\"}");
 	}
@@ -649,5 +650,6 @@ function get_attributes_list(){
 	}
 	
 	echo json_encode($output);
+	return $output;
 }
 ?>
