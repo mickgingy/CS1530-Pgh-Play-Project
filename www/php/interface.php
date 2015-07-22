@@ -107,8 +107,18 @@ function get_neighborhoods(){
 	global $delim_output;
 	connect();
 	
+	$result = $db->query("SELECT DISTINCT neighborhood FROM parks");
+	$i = 0;
+	$row = $result->fetch_array();
+	while($row != NULL){
+		$output[] = $row['neighborhood'];
+		$row = $result->fetch_array();
+	}
+	
+	echo json_encode($output);
+	return $output;
 	//Check if the zip parameter was sent
-	if(isset($_GET['zip'])){	//Make appropriate SQL Query.
+	/*if(isset($_GET['zip'])){	//Make appropriate SQL Query.
 		$query = "SELECT * FROM neighborhoods WHERE zip_code={$_GET['zip']}";
 	}else{
 		$query = "SELECT * FROM neighborhoods";
@@ -144,10 +154,7 @@ function get_neighborhoods(){
 	}else{
 		//Output using JSON
 		$output = json_encode($results);
-	}
-	
-	echo $output;
-	return $results;
+	}*/
 }
 
 /*
@@ -300,7 +307,7 @@ function get_parks_by_neighborhood(){
 	
 	//Check if the zip parameter was sent
 	if(isset($_GET['neighborhood'])){
-		$query = "SELECT * FROM parks WHERE neighborhood={$_GET['neighborhood']}";
+		$query = "SELECT * FROM parks WHERE neighborhood='{$_GET['neighborhood']}'";
 	}else{
 		die("{\"error\":\"Missing parameter: zip\"}");
 	}

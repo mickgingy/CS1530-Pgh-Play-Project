@@ -3,6 +3,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 var gpslat;
 var gpslong;
 var map;
+var parks;
 $.ajaxSetup({ cache: false });
 //var lat;
 //var lng;
@@ -139,12 +140,17 @@ function makeMap(lat, lng) {
 				var response = JSON.parse(ajax.responseText);
 				for (var i = 0; i < response.length; i++) {
 					//Place marker onto the screen
-					addMarker(map, response[i].gpslat, response[i].gpslong);		
+					addMarker(map, response[i].gpslat, response[i].gpslong);	
+					parks[i] = response[i].park_id;
 					//Add the info into the list under the map
 					/**
 						Mick, do the UI nonsense here with the info				
 					*/
 					$('#parkslist').append(response[i].park_name + " Park<br>");
+					$('... something ...').click(function() {
+						localStorage["park_id"] = parks[i];
+						window.location.href = "viewpark.html";
+					});
 					//Other stuff you need to do
 				}
 			}
