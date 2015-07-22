@@ -134,7 +134,7 @@ function showPosition(position) {
 	geocoder.geocode( { 'location': new google.maps.LatLng(lat = position.coords.latitude, lng = position.coords.longitude) }, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			if (results[0]) {
-				//$('#address').val(results[0].formatted_address);
+				$('#address').val(results[0].formatted_address);
 				var i;
 				for(i = 0; i < results[0].address_components.length; i++){
 					if(results[0].address_components[i].types[0] == "postal_code"){
