@@ -155,20 +155,22 @@
 		
 		public function testAddComment(){
 			$_POST['park_id'] = 1;
+			$_GET['park_id'] = 1;
 			$_POST['comment'] = 'this is a new comment';
 			$_POST['user_id'] = 1;
 			$_POST['star_rating'] = 5;
-			$a = getDetailedParkInfo($park_id);
+			$a = get_park_info();
 			//Under assumption of anonymous commenting
 			add_comment();
-			$a = getDetailedParkInfo($park_id);
-			$b = $a->getComments();
+			$a = get_park_info();
+			$b = $a['comments'];
 			$this->assertTrue(in_array($comment, $b));
 		}
 		
 		public function testGetDetailedParkInfoById(){
 			//Assume park with park id = 1
-			$a = getDetailedParkInfo(1);
+			$_GET['park_id'] = 1;
+			$a = get_park_info();
 			$this->assertNotNull($a);
 		}
 		

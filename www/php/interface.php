@@ -545,6 +545,7 @@ function get_park_info(){
 	}else{
 		die("{\"error\":\"Missing parameter: park_id\"}");
 	}
+	return $output;
 }
 
 /*
