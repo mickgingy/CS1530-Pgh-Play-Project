@@ -10,12 +10,7 @@ var main = function() {
 	//Send AJAX request for neighborhoods JSON object PHP script
 	ajax = new XMLHttpRequest();
   	ajax.onreadystatechange = function() {
-		if (ajax.readyState == 4 && ajax.status == 200) {
-			var response = ajax.responseText;
-			alert(response);
-			// TODO: this is on you guys, since I really can't test the app without PhoneGap.
-			// Just call my addToList() function for every neighborhood and every park within
-			// each neighborhood, making sure to specify them accordingly. 
+		if (ajax.readyState == 4 && ajax.status == 200) { 
 			var response = JSON.parse(ajax.responseText);
 			var i;
 			for(i = 0; i < response.length; i++) {
