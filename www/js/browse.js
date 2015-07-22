@@ -34,7 +34,7 @@ var main = function() {
 	}
 	
 	ajax.open("GET", "http://54.163.175.56/pgh/pghgetneighborhoods.php", true);
-	//ajax.open("GET", "php/pghgetneighborhoods.php");
+	//ajax.open("GET", "pgh/pghgetneighborhoods.php");
 	ajax.send();
 };
 

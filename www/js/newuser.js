@@ -14,7 +14,7 @@ $(document).ready(function() {
 			// if passwords match
 			if (pw == confirm) {
 					// check if username already exists
-					$.post('http://54.163.175.56/php/pghnewuser.php', {username:username, email:email, name:name, pw:pw, confirm:confirm}, 
+					$.post('http://54.163.175.56/pgh/pghnewuser.php', {username:username, email:email, name:name, pw:pw, confirm:confirm}, 
 					function(data) {
 						if (data == "exists") {
 								alert("username or email already exists, please re-enter");
