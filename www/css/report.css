@@ -1,0 +1,30 @@
+#login {
+	width: 100%;
+	height: 91%;
+	text-align: center;
+}	
+
+#reporttext {
+	margin-top: 10%;
+	font-family: Karla;
+	font-size: 150%;
+}
+
+textarea {
+	height: 40%;
+	width: 80%;
+	font-size: 120%;
+	border: 3px solid #AFCF9F;
+}
+
+button {
+	margin-top: 3%;
+	width: 60%;
+	height: 10%;
+	color: white;
+	font-size: 150%;
+	letter-spacing: 1px;
+	font-family: Karla;
+	border: none;
+	background-color: #85CF61;
+}

@@ -1,8 +1,12 @@
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="css/report.css">
 		<link rel="stylesheet" type="text/css" href="css/container_header.css">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Karla">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<script src="http://maps.googleapis.com/maps/api/js">//Imports the Google Maps API</script>
+		<script src="js/report.js">//Imports the custom JavaScript for this page</script>
+		<script src="js/menu.js">//Imports JavaScript for the menu bar</script>
 	<head>
 	<body>
 		<div id="container">
@@ -15,10 +19,29 @@
 						<p id="title">PGH PLAY PROJECT</p>
 					</div>
 				</div>
+				<div class="right">
+					<div class="r">
+						<i class="fa fa-plus" id="plus" onclick="addPark()"></i>
+						<i class="fa fa-bars" id="bars" onclick="userMenu()"></i>
+					</div>
+				</div>
+			</div>
+			<div id="menu">
+				<div class="btn" id="account_btn" onclick="window.location.href = 'account.html'">
+					<div class="txt" style="font-family: Karla">Account Settings</div>
+				</div>
+				<div class="btn" id="logout_btn" onclick="logout()">
+					<div class="txt" style="font-family: Karla">Logout</div>
+				</div>
+				<div class="btn" id="report_btn" onclick="window.location.href = 'report.html'">
+					<div class="txt" style="font-family: Karla">Report a Problem</div>
+				</div>
 			</div>
 			<div id="login">
 				<form action="" method="post">
-					Report a problem!
+					<p id="reporttext">Report a problem!</p>
+					<textarea placeholder="Please enter your problem here. It will be reported to the system administrator/moderator(s) as soon as possible, and they will do their best to get back to you as soon as is convenient."></textarea><br>
+					<button type="submit">Submit!</button>
 				</form>
 			</div>
 		</div>
