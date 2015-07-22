@@ -1,11 +1,11 @@
 <?php
 #
 //session_start();
-
+header('Access-Control-Allow-Origin: *');  
 // global db var
 $db = NULL;
 //If true, will output with $& delimiters, if false, will output in JSON encoding
-$delim_output = true;
+$delim_output = false;
 
 /*
 	Function opens a database connection to MySQL Server
@@ -239,6 +239,7 @@ function get_parks_by_gps(){
 		$longbb = max($longa, $longb);
 		$lataa = min($lata, $latb);
 		$latbb = max($lata, $latb);
+		echo "SELECT * FROM parks WHERE gpslong BETWEEN $longaa AND $longbb AND gpslat BETWEEN $lataa AND $latbb;\n";
 		$query = "SELECT * FROM parks WHERE gpslong BETWEEN $longaa AND $longbb AND gpslat BETWEEN $lataa AND $latbb";
 	}else{
 		die("{\"error\":\"Missing parameter(s): long, lat, zoom\"}");
@@ -421,8 +422,7 @@ function new_park(){
 	$address = $obj['address'];
 	$long = $obj['gpslong'];
 	$lat = $obj['gpslat'];
-	// hack for now... zip code is not given so I'm putting this as temp
-	$zip = "15213";
+	$zip = $obj['zip'];
 	if(isset($obj['infant_safe']))
 		$infant_safe = $obj['infant_safe'];
 	else
