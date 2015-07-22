@@ -1,5 +1,8 @@
 // On load, the browser window will load the Google Map div, starting by calling the initialize() function.
 google.maps.event.addDomListener(window, 'load', initialize);
+var gpslat;
+var gpslong;
+var map;
 $.ajaxSetup({ cache: false });
 //var lat;
 //var lng;
@@ -105,31 +108,52 @@ function makeMap(lat, lng) {
 		}
 	]);
 
-   	/**
-   	 *	Get AJAX return value from PHP DB — all nearby parks of user-inputted location.
-   	 *	Then dynamically add each park to the #park_list ul.
-   	 */
-	ajax = new XMLHttpRequest();
-  	ajax.onreadystatechange = function() {
-		if (ajax.readyState == 4 && ajax.status == 200) {
-			var response = JSON.parse(ajax.responseText);
-			for (var i = 0; i < response.length; i++) {
-				//Place marker onto the screen
-				addMarker(response[i].gpslong, response[i].gpslat);		
-				//Add the info into the list under the map
-				/**
-					Mick, do the UI nonsense here with the info				
-				*/
-				$('#parkslist').append(response[i].park_name + " Park<br>");
-				//Other stuff you need to do
+	var gpslat = lat;
+	var gpslong = lng;	
+	
+	if ((zip_code = localStorage.getItem("zip_code")) != null) {
+		ajax = new XMLHttpRequest();
+		ajax.onreadystatechange = function() {
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				var response = JSON.parse(ajax.responseText);
+				for (var i = 0; i < response.length; i++) {
+					//Place marker onto the screen
+					addMarker(map, response[i].gpslat, response[i].gpslong);		
+					//Add the info into the list under the map
+					/**
+						Mick, do the UI nonsense here with the info				
+					*/
+					$('#parkslist').append(response[i].park_name + " Park<br>");
+					//Other stuff you need to do
+				}
 			}
 		}
+		
+		var data = "zip=" + zip_code;	
+		ajax.open("GET", "http://54.163.175.56/pgh/pghgetparks.php?" + data, true);
+		ajax.send();
+	}else{
+		ajax = new XMLHttpRequest();
+		ajax.onreadystatechange = function() {
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				var response = JSON.parse(ajax.responseText);
+				for (var i = 0; i < response.length; i++) {
+					//Place marker onto the screen
+					addMarker(map, response[i].gpslat, response[i].gpslong);		
+					//Add the info into the list under the map
+					/**
+						Mick, do the UI nonsense here with the info				
+					*/
+					$('#parkslist').append(response[i].park_name + " Park<br>");
+					//Other stuff you need to do
+				}
+			}
+		}
+		
+		var data = "long=" + lng + "&lat=" + lat + "&zoom=" + map.getZoom();	
+		ajax.open("GET", "http://54.163.175.56/pgh/pghgetparksbygps.php?" + data, true);
+		ajax.send();
 	}
-	
-	var data = "long=" + lng + "&lat=" + lat + "&zoom=" + map.getZoom();	
-	ajax.open("GET", "http://54.163.175.56/pgh/pghgetparksbygps.php?" + data, true);
-	ajax.send();
-	
 	addMarker(map, lat, lng);
 }
 
