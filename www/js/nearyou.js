@@ -220,6 +220,7 @@ function addToList(name) {
  *	Param: name — the name of the park we want to search for
  */
 function goToParkPage(name) {
-	localStorage['name'] = name;
+	localStorage.removeItem('park_name');
+	localStorage['park_name'] = name;
 	window.location.href = 'viewpark.html';
 }
