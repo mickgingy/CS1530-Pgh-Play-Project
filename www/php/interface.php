@@ -375,8 +375,18 @@ Parameters:
 			{	"attribute_id" : 11,
 				"attribute_name" : "Pavilions"
 			}
+		],
+		"nearby" : [
+			{	"attribute_id" : 12,
+				"attribute_name" : "Coffee"
+			},
+			{	"attribute_id" : 14,
+				"attribute_name" : "Wireless"
+			},
+			{	"attribute_id" : 13,
+				"attribute_name" : "Shopping"
+			}
 		]
-
 	}
 Returns:
 	JSON encoded object containing park information
@@ -419,7 +429,14 @@ function new_park(){
 	}
 	if(isset($obj['attributes'])){
 		foreach($obj['attributes'] as $attribute){
-			$db->query("INSERT INTO ParkAttributes (park_id, attribute_id) VALUES ($park_id, {$attribute['attribute_id']}}))");
+			if($attribute['checked'] == 1)
+				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 0}))");
+		}
+	}
+	if(isset($obj['nearby'])){
+		foreach($obj['nearby'] as $attribute){
+			if($attribute['checked'] == 1)
+				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 1}))");
 		}
 	}
 }
