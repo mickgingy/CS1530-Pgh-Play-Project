@@ -29,20 +29,30 @@ function getParkInfo(name){
 	ajax.onreadystatechange = function() {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			park_info = JSON.parse(ajax.responseText);
-			document.getElementById('park_name').innerHTML = park_info.name;
-			document.getElementById('park_addr').innerHTML = park_info.address;
-			document.getElementById('park_hood').innerHTML = park_info.neighborhood;
 			
-			for (var i = 0; i < park_info.attributes.length; i++) {
-				var attr = document.createElement('p');
-				attr.innerHTML = park_info.attributes[i];
-				$('#l_attributes').append(input);
+			if (typeof park_info.name !== 'undefined')
+				document.getElementById('park_name').innerHTML = park_info.name;
+			
+			if (typeof park_info.address !== 'undefined')
+			document.getElementById('park_addr').innerHTML = park_info.address;
+			
+			if (typeof park_info.neighborhood !== 'undefined')
+				document.getElementById('park_hood').innerHTML = park_info.neighborhood;
+			
+			if (typeof park_info.attributes !== 'undefined') {
+				for (var i = 0; i < park_info.attributes.length; i++) {
+					var attr = document.createElement('p');
+					attr.innerHTML = park_info.attributes[i];
+					$('#l_attributes').append(input);
+				}
 			}
 			
-			for (var i = 0; i < park_info.nearby.lenth; i++) {
-				var attr = document.createElement('p');
-				attr.innerHTML = park_info.nearby[i];
-				$('#r_attributes').append(attr);
+			if (typeof park_info.nearby !== 'undefined') {
+				for (var i = 0; i < park_info.nearby.lenth; i++) {
+					var attr = document.createElement('p');
+					attr.innerHTML = park_info.nearby[i];
+					$('#r_attributes').append(attr);
+				}
 			}
 			
 			var rp = document.createElement('p');
