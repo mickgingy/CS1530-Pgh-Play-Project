@@ -1,5 +1,6 @@
 // On load, the browser window will load the Google Map div, starting by calling the initialize() function.
 google.maps.event.addDomListener(window, 'load', initialize);
+
 var gpslat;
 var gpslong;
 var map;
@@ -7,6 +8,14 @@ var parks;
 $.ajaxSetup({ cache: false });
 //var lat;
 //var lng;
+	
+google.maps.event.addListener(map, 'zoom_changed', function () {
+    google.maps.event.addListenerOnce(map, 'bounds_changed', function (e) {
+		var c = map.getCenter();
+		ajaxCall(c.lat(), c.lng());
+    });
+});	
+
 	
 /**
  *	function initialize()
@@ -20,7 +29,8 @@ function initialize() {
 	var zip_code;
 	if ((zip_code = localStorage.getItem("zip_code")) != null) {
 		getZip(zip_code);
-	}else{
+	}
+	 else{
 		getLocation();
 	}
 }
@@ -108,9 +118,19 @@ function makeMap(lat, lng) {
 			]
 		}
 	]);
+	
+	ajaxCall(lat, lng);
+	
+	addMarker(map, lat, lng);
+}
 
-	var gpslat = lat;
-	var gpslong = lng;	
+/**
+ *	function ajaxCall()
+ *
+ *	Wrapper function for the Database AJAX calls.
+ *	Params: lat and lng coordinates
+ */
+function ajaxCall(gpslat, gpslong) {
 	
 	if ((zip_code = localStorage.getItem("zip_code")) != null) {
 		ajax = new XMLHttpRequest();
@@ -134,7 +154,8 @@ function makeMap(lat, lng) {
 		var data = "zip=" + zip_code;	
 		ajax.open("GET", "http://54.163.175.56/pgh/pghgetparks.php?" + data, true);
 		ajax.send();
-	}else{
+	}
+	else {
 		ajax = new XMLHttpRequest();
 		ajax.onreadystatechange = function() {
 			if (ajax.readyState == 4 && ajax.status == 200) {
@@ -147,11 +168,12 @@ function makeMap(lat, lng) {
 					/**
 						Mick, do the UI nonsense here with the info				
 					*/
-					$('#parkslist').append(response[i].park_name + " Park<br>");
-					$('... something ...').click(function() {
-						localStorage["park_id"] = parks[i];
-						window.location.href = "viewpark.html";
-					});
+					// $('#parkslist').append(response[i].park_name + " Park<br>");
+// 					$('... something ...').click(function() {
+// 						localStorage["park_id"] = parks[i];
+// 						window.location.href = "viewpark.html";
+// 					});
+					addToList(response[i].park_name);
 					//Other stuff you need to do
 				}
 			}
@@ -161,7 +183,6 @@ function makeMap(lat, lng) {
 		ajax.open("GET", "http://54.163.175.56/pgh/pghgetparksbygps.php?" + data, true);
 		ajax.send();
 	}
-	addMarker(map, lat, lng);
 }
 
 /**
