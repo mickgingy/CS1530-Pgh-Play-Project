@@ -56,18 +56,18 @@ function addToList(name, isHood) {
 	var newDiv = document.createElement('div');
 	newDiv.className = 'listElement';
 	newDiv.innerHTML = name;
-	newDiv.onclick = (function () {
-		var parkname = name;
-		return function() {
-			goToParkPage(parkname);
-		}
-	});
 	
 	if (isHood == true) {
 		newDiv.id = 'hood';
 	}
 	else {
 		newDiv.id = 'park';
+		newDiv.onclick = (function () {
+			var parkname = name;
+			return function() {
+				goToParkPage(parkname);
+			}
+		});
 	}
 
 	$('#TheList').append(newDiv);
