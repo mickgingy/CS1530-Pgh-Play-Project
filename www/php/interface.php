@@ -439,7 +439,7 @@ function new_park(){
 	else
 		$nine_twelve_safe = 0;
 	if(isset($obj['universal_safe'])){
-		$universal = $obj['universal_safe']);
+		$universal = $obj['universal_safe'];
 	else
 		$universal = 0;
 	
