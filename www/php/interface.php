@@ -458,13 +458,13 @@ function new_park(){
 	if(isset($obj['attributes'])){
 		foreach($obj['attributes'] as $attribute){
 			if($attribute['attribute_checked'] == 1)
-				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 0))");
+				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 0)");
 		}
 	}
 	if(isset($obj['nearby'])){
 		foreach($obj['nearby'] as $attribute){
 			if($attribute['checked'] == 1)
-				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 1))");
+				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 1)");
 		}
 	}
 }
