@@ -212,9 +212,9 @@ function get_parks(){
 /*
 	Returns a list of parks in the system by gps coordinate
 	Parameters:
-		GET : long
+		GET : long	User's current location
 		GET : lat
-		GET : zoom
+		GET : zoom	(0-19) value  19 = most fine, 0 = most coarse
 	Returns:
 		&$ delimited list of parks
 		OR
@@ -224,10 +224,20 @@ function get_parks_by_gps(){
 	global $db;
 	global $delim_output;
 	connect();
-	
+	$zoom = new array(39.3216, 19.6608, 9.8304, 4.9152, 2.4576, 1.2288, .6144, .3072, .1536, .0768, .0384, .0192, .0096, .0048, .0024, .0012, .0006, .0003, .00015, .00007);
 	//Check if the zip parameter was sent
 	if(isset($_GET['long']) && isset($_GET['lat']) && isset($_GET['zoom'])){
-		$query = "SELECT * FROM parks WHERE zip_code={$_GET['zip']}";
+		$zoom_dif = $zoom[$_GET['zoom']];
+		$longa = $_GET['long'] - $zoom_dif;
+		$longb = $_GET['long'] + $zoom_dif;
+		$lata = $_GET['lat'] - $zoom_dif;
+		$latb = $_GET['lat'] + $zoom_dif;
+		
+		$longaa = min($longa, $longb);
+		$longbb = max($longa, $longb);
+		$lataa = min($lata, $latb);
+		$latbb = max($lata, $latb);
+		$query = "SELECT * FROM parks WHERE gpslong BETWEEN $longaa AND $longbb AND gpslat BETWEEN $lataa AND $latbb";
 	}else{
 		die("{\"error\":\"Missing parameter: zip\"}");
 	}
@@ -403,6 +413,8 @@ function new_park(){
 	$obj = json_decode($_POST['obj'], true);
 	$name = $obj['name'];
 	$address = $obj['address'];
+	$long = $obj['gpslong'];
+	$lat = $obj['gpslat'];
 	// hack for now... zip code is not given so I'm putting this as temp
 	$zip = "15213";
 	if(isset($obj['infant_safe']))
@@ -423,9 +435,9 @@ function new_park(){
 		$nine_twelve_safe = 0;
 	
 	if(!isset($obj['neighborhood'])){
-		$result = $db->query("INSERT INTO parks (name, address, zip_code, infants, toddlers, five, nine) VALUES ('$name','$address','$zip','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe')") or trigger_error(mysql_error());
+		$result = $db->query("INSERT INTO parks (name, address, zip_code, infants, toddlers, five, nine, gpslong, gpslat) VALUES ('$name','$address','$zip','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe', $gpslong, $gpslat)") or trigger_error(mysql_error());
 	}else{
-		$result = $db->query("INSERT INTO parks (name, address, zip_code, neighborhood, infants, toddlers, five, nine) VALUES ('$name','$address','$zip','{$obj['neighborhood']}','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe')") or trigger_error(mysql_error());
+		$result = $db->query("INSERT INTO parks (name, address, zip_code, neighborhood, infants, toddlers, five, nine) VALUES ('$name','$address','$zip','{$obj['neighborhood']}','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe', $gpslong, $gpslat)") or trigger_error(mysql_error());
 	}
 	if(isset($obj['attributes'])){
 		foreach($obj['attributes'] as $attribute){
