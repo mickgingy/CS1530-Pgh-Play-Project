@@ -8,16 +8,19 @@
 }
 
 #park_name {
-	height: 11%;
+	height: 5%;
 	width: 100%;
 	color: white;
 	background-color: #85CF61;
+	font-size: 120%;
 }
 
 #park_addr, #park_hood {
-	height: 5%;
+	height: 10%;
 	width: 100%;
 	color: #85CF61;
+	vertical-align: middle;
+	text-align: center;
 }
 
 #park_addr {
