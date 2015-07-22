@@ -239,7 +239,6 @@ function get_parks_by_gps(){
 		$longbb = max($longa, $longb);
 		$lataa = min($lata, $latb);
 		$latbb = max($lata, $latb);
-		echo "SELECT * FROM parks WHERE gpslong BETWEEN $longaa AND $longbb AND gpslat BETWEEN $lataa AND $latbb;\n";
 		$query = "SELECT * FROM parks WHERE gpslong BETWEEN $longaa AND $longbb AND gpslat BETWEEN $lataa AND $latbb";
 	}else{
 		die("{\"error\":\"Missing parameter(s): long, lat, zoom\"}");
@@ -420,8 +419,8 @@ function new_park(){
 	$obj = json_decode($_POST['obj'], true);
 	$name = $obj['name'];
 	$address = $obj['address'];
-	$long = $obj['gpslong'];
-	$lat = $obj['gpslat'];
+	$gpslong = $obj['gpslong'];
+	$gpslat = $obj['gpslat'];
 	$zip = $obj['zip'];
 	if(isset($obj['infant_safe']))
 		$infant_safe = $obj['infant_safe'];
@@ -443,11 +442,11 @@ function new_park(){
 	if(!isset($obj['neighborhood'])){
 		$result = $db->query("INSERT INTO parks (name, address, zip_code, infants, toddlers, five, nine, gpslong, gpslat) VALUES ('$name','$address','$zip','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe', $gpslong, $gpslat)") or trigger_error(mysql_error());
 	}else{
-		$result = $db->query("INSERT INTO parks (name, address, zip_code, neighborhood, infants, toddlers, five, nine) VALUES ('$name','$address','$zip','{$obj['neighborhood']}','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe', $gpslong, $gpslat)") or trigger_error(mysql_error());
+		$result = $db->query("INSERT INTO parks (name, address, zip_code, neighborhood, infants, toddlers, five, nine, gpslong, gpslat) VALUES ('$name','$address','$zip','{$obj['neighborhood']}','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe', $gpslong, $gpslat)") or trigger_error(mysql_error());
 	}
 	if(isset($obj['attributes'])){
 		foreach($obj['attributes'] as $attribute){
-			if($attribute['checked'] == 1)
+			if($attribute['attribute_checked'] == 1)
 				$db->query("INSERT INTO ParkAttributes (park_id, attribute_id, nearby) VALUES ($park_id, {$attribute['attribute_id']}, 0}))");
 		}
 	}

@@ -1,6 +1,6 @@
 // On load, the browser window will load the Google Map div, starting by calling the initialize() function.
 google.maps.event.addDomListener(window, 'load', initialize);
-			
+$.ajaxSetup({ cache: false });
 //var lat;
 //var lng;
 	
@@ -12,30 +12,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
  * 	inputted zip code or their current location.
  */
 function initialize() {
-	// Gets the URL from the current page
 	var URL = window.location.href;
-	
-	// If there are GET variables in the URL
-	if (URL.indexOf('?') !== -1) {
-		// Split the URL String on the '?' character to grab the GET variables within it
-		var split_URL = URL.split('?');
-		var get_vars = split_URL[1];
-		
-		// First we check to see if the 'zipcode' GET variable is in the list of GET variables
-		var zip_index = get_vars.indexOf('zipcode');
-		
-		// If so, we call the getZip() function, sending it the inputted zipcode as a parameter
-		if (zip_index !== -1) {
-			getZip(get_vars.substring(zip_index + 8, zip_index + 14));
-		}
-		
-		// Then we check to see if the 'location' GET variable is in the list
-		var loc_index = get_vars.indexOf('location');
-		
-		// In which case we call the getLocation() function
-		if (loc_index !== -1) {
-			getLocation();
-		}
+	var zip_code;
+	if ((zip_code = localStorage.getItem("zip_code")) != null) {
+		getZip(zip_code);
+	}else{
+		getLocation();
 	}
 }
 
@@ -130,21 +112,25 @@ function makeMap(lat, lng) {
 	ajax = new XMLHttpRequest();
   	ajax.onreadystatechange = function() {
 		if (ajax.readyState == 4 && ajax.status == 200) {
-			var response = JSON.parse(httpRequest.responseText);
+			var response = JSON.parse(ajax.responseText);
 			for (var i = 0; i < response.length; i++) {
 				//Place marker onto the screen
 				addMarker(response[i].gpslong, response[i].gpslat);		
 				//Add the info into the list under the map
-				$('#parkslist').append(response[i].park_name + "<br>" + response[i].park_address);
+				/**
+					Mick, do the UI nonsense here with the info				
+				*/
+				$('#parkslist').append(response[i].park_name + " Park<br>");
 				//Other stuff you need to do
 			}
 		}
 	}
 	
-	ajax.open("POST", "http://54.163.175.56/php/pghgetparksbygps.php", true);
-	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	var data = "long=" + lng + "&lat=" + lat + "zoom=" + map.getZoom();	
-	ajax.send(data);
+	var data = "long=" + lng + "&lat=" + lat + "&zoom=" + map.getZoom();	
+	ajax.open("GET", "http://54.163.175.56/pgh/pghgetparksbygps.php?" + data, true);
+	ajax.send();
+	
+	addMarker(map, lat, lng);
 }
 
 /**
@@ -157,8 +143,6 @@ function addMarker(feature, lat, lng) {
 	var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 	var marker = new google.maps.Marker({
 		position: new google.maps.LatLng(lat, lng),
-		icon: iconbase + feature,
-		// icon: icons[feature.type].icon (?)
 		map: map
 	});
 }

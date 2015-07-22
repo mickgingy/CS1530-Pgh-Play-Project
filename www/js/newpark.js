@@ -1,67 +1,37 @@
 // PGH Play project
 // new park entry script
 // enter information about the park into the db and populate tables via newpark.hml
+var zip;
+var lng;
+var lat;
+
 $(document).ready(function() {
 	$("#sub_btn").on('click', function() {
-			// create variables from html elements
-			var name = $('#name').val();
-			var address = $('#address').val();
-			var zip = $('#zip').val();
-			var neighborhood = $('#neighborhood').val();
-			var rating = $('#rating').val();
-			
-			// if infant is checked
- /*			if($("#infants").is(':checked')){
-				var infants = "yes";
-			}
-			else {
-				var infants = "no";
-			}
-			// if toddlers is checked
-			if($("#toddlers").is(':checked')){
-				var toddlers = "yes";
-			}
-			else {
-				var toddlers = "no";
-			}
-			// if 5-8 is checked
-			if($("#5-8").is(':checked')){
-				var five_eight = "yes";
-			}
-			else {
-				var five_eight = "no";
-			}
-			// if 9-12 is checked
-			if($("#9-12").is(':checked')){
-				var nine_twelve = "yes";
-			}
-			else {
-				var nine_twelve = "no";
-			}
-	*/
-			var comment = $('textarea#comment').val();
-			
-		
+		// create variables from html elements
+		var name = $('#name').val();
+		var address = $('#address').val();
+		var neighborhood = $('#neighborhood').val();
+		//var rating = $('#rating').val();
+		//var comment = $('textarea#comment').val();
 			
 	    $(".rating input:radio").attr("checked", false);
-	       $('.rating input').click(function () {
-	           $(".rating span").removeClass('checked');
-	           $(this).parent().addClass('checked');
-	       });
+		$('.rating input').click(function () {
+			$(".rating span").removeClass('checked');
+			$(this).parent().addClass('checked');
+		});
 
-	       $('input:radio').change(
-	       function(){
-	           var userRating = this.value;
-	           alert(userRating);
-	       }); 
-		  
-		 //
+	    $('input:radio').change(function(){
+			var userRating = this.value;
+			alert(userRating);
+		}); 
 		
 		
 		var obj = {	"name" : name,
 		"address" : address,
 		"zip" : zip,
 		"neighborhood" : neighborhood, 
+		"gpslong": lng,
+		"gpslat": lat,
 		"infant_safe" : document.getElementById('infants').checked,
 		"toddler_safe" : document.getElementById('toddlers').checked,
 		"five_eight_safe" : document.getElementById('5-8').checked,
@@ -141,11 +111,37 @@ $(document).ready(function() {
 			}
 		]
 	};
-			// post to server to store information
+	
+	
+	// post to server to store information
 	$.post('http://54.163.175.56/pgh/newpark.php',"obj=" + JSON.stringify(obj), function(data){
 			alert(data);	
 		});
 	 });
-
-
 });
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } 
+	else { 
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+function showPosition(position) {
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode( { 'location': new google.maps.LatLng(lat = position.coords.latitude, lng = position.coords.longitude) }, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			if (results[0]) {
+				$('#address').val(results[0].formatted_address);
+				var i;
+				for(i = 0; i < results[0].address_components.length; i++){
+					if(results[0].address_components[i].types[0] == "postal_code"){
+						zip = results[0].address_components[i].long_name;
+						break;
+					}
+				}
+			}
+		}
+	});
+}
