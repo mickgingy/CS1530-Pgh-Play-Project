@@ -63,10 +63,7 @@ function addToList(name, isHood) {
 	else {
 		newDiv.id = 'park';
 		newDiv.onclick = (function () {
-			var parkname = name;
-			return function() {
-				goToParkPage(parkname);
-			}
+			goToParkPage(name);
 		});
 	}
 
@@ -80,6 +77,6 @@ function addToList(name, isHood) {
  *	Param: name — the name of the park we want to search for
  */
 function goToParkPage(name) {
-	localStorage['name'] = name;
+	localStorage['park_name'] = name;
 	window.location.href = 'viewpark.html';
 }

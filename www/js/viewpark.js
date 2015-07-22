@@ -16,7 +16,8 @@ $.ajaxSetup({ cache: false });
  * 	inputted zip code or their current location.
  */
 function initialize() {
-	if ((name = localStorage.getItem("name")) != null) {
+	var name;
+	if ((name = localStorage.getItem("park_name")) != null) {
 		getParkInfo(name);
 	}
 }
