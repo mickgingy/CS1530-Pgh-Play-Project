@@ -209,13 +209,7 @@ function addToList(name) {
 	var newDiv = document.createElement('div');
 	newDiv.className = 'listElement';
 	newDiv.innerHTML = name;
-	newDiv.onclick = (function () {
-		var parkname = name;
-		return function() {
-			goToParkPage(parkname);
-		}
-	});
-
+	newDiv.onclick = function() { goToParkPage(name);  };
 	$('#TheList').append(newDiv);
 }
 
