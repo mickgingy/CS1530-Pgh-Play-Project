@@ -1,8 +1,8 @@
 // On load, the browser window will load the Google Map div, starting by calling the initialize() function.
 google.maps.event.addDomListener(window, 'load', initialize);
 			
-	var lat;
-	var lng;
+//var lat;
+//var lng;
 	
 /**
  *	function initialize()
@@ -124,29 +124,27 @@ function makeMap(lat, lng) {
 	]);
 
    	/**
-   	 *  TODO:
-   	 *
    	 *	Get AJAX return value from PHP DB — all nearby parks of user-inputted location.
    	 *	Then dynamically add each park to the #park_list ul.
    	 */
-	 
-	//Based on this TODO, I assume we make call here:
-	var httpRequest;
-	if (window.XMLHttpRequest) {
-		httpRequest = new XMLHttpRequest();
-		if (httpRequest.overrideMimeType) {
-			httpRequest.overrideMimeType('text/xml');
+	ajax = new XMLHttpRequest();
+  	ajax.onreadystatechange = function() {
+		if (ajax.readyState == 4 && ajax.status == 200) {
+			var response = JSON.parse(httpRequest.responseText);
+			for (var i = 0; i < response.length; i++) {
+				//Place marker onto the screen
+				addMarker(response[i].gpslong, response[i].gpslat);		
+				//Add the info into the list under the map
+				$('#parkslist').append(response[i].park_name + "<br>" + response[i].park_address);
+				//Other stuff you need to do
+			}
 		}
 	}
-	if (!httpRequest) {
-		alert('Cannot create an XMLHttpRequest instance');
-		return false;
-	}
-	var data = "long=" + lng + "&lat=" + lat + "zoom=" + map.getZoom() ;
-	httpRequest.open('POST', 'http://54.163.175.56/pgh/pghgetparksbygps.php', true);
-	httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	httpRequest.onreadystatechange = function() { processServerResponse(httpRequest); };
-	httpRequest.send(data);
+	
+	ajax.open("POST", "http://54.163.175.56/php/pghgetparksbygps.php", true);
+	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	var data = "long=" + lng + "&lat=" + lat + "zoom=" + map.getZoom();	
+	ajax.send(data);
 }
 
 /**
@@ -155,29 +153,12 @@ function makeMap(lat, lng) {
  *	Adds a Marker object to the Map based on a specified feature.
  *	Params: feature —— the feature that the Marker is created based on.
  */
-function addMarker(feature) {
+function addMarker(feature, lat, lng) {
 	var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 	var marker = new google.maps.Marker({
-		position: new google.maps.LatLng(40.43473, -79.94318),
+		position: new google.maps.LatLng(lat, lng),
 		icon: iconbase + feature,
 		// icon: icons[feature.type].icon (?)
 		map: map
 	});
-}
-
-
-
-function processServerResponse(httpRequest){
-	if(httpRequest.readyState == 4 && httpRequest.status == 200){
-		//Parse the response into a javascript object
-		var data = JSON.parse(httpRequest.responseText);
-		var i;
-		for(i = 0; i < data.length; i++){
-			//Place marker onto the screen
-			//addMarker(data[i].gpslong, data[i].gpslat);		
-			//Add the info into the list under the map
-			//$('#parkslist').append(data[i].park_name + "</br>" + data[i].park_address);
-			//Other stuff you need to do
-		}
-	}
 }
