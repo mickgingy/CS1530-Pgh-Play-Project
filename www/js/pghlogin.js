@@ -24,7 +24,7 @@ function login() {
 	var email = document.getElementById("email").value;
 	var password = document.getElementById("password").value;
 	
-	ajax.open("POST", "php/pghlogin.php", true);	
+	ajax.open("POST", "http://54.163.175.56/pgh/pghlogin.php", true);	
 	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	ajax.send("email=" + email + "&password=" + password);
 }
@@ -52,7 +52,7 @@ function login() {
 	var email = document.getElementById("email").value;
 	var password = document.getElementById("password").value;
 	
-	ajax.open("POST", "php/pghlogin.php", true);	
+	ajax.open("POST", "http://54.163.175.56/pgh/pghlogin.php", true);	
 	ajax.setRequestHeader("Content-type", "");
 	ajax.send("username=" + email);*/
 //}

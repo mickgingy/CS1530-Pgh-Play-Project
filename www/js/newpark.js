@@ -62,86 +62,89 @@ $(document).ready(function() {
 		"address" : address,
 		"zip" : zip,
 		"neighborhood" : neighborhood, 
-		"infant_safe" : $('#infants').is(':checked'),
-		"toddler_safe" : $('#toddlers').is(':checked'),
-		"five_eight_safe" : $('#5-8').is(':checked'),
-		"nine_twelve_safe" : $('#9-12').is(':checked'),
-		"universal_safe" : $('#universal').is(':checked'),
+		"infant_safe" : document.getElementById('infants').checked,
+		"toddler_safe" : document.getElementById('toddlers').checked,
+		"five_eight_safe" : document.getElementById('5-8').checked,
+		"nine_twelve_safe" : document.getElementById('9-12').checked,
+		"universal_safe" : document.getElementById('universal').checked,
 		attributes : [
 			{	"attribute_id" : 1,
 				"attribute_name" : "Playground",
-				"attribute_checked": $('#playground').is(':checked')
+				"attribute_checked": document.getElementById('playground').checked
 			},
 			{	"attribute_id" : 2,
 				"attribute_name" : "Picnic Tables",
-				"attribute_checked": $('#picnic').is(':checked')
+				"attribute_checked": document.getElementById('picnic').checked
 			},
 			{	"attribute_id" : 3,
 				"attribute_name" : "Grills",
-				"attribute_checked": $('#grills').is(':checked')
+				"attribute_checked": document.getElementById('grills').checked
 			},
 			{	"attribute_id" : 4,
 				"attribute_name" : "Walking Track",
-				"attribute_checked": $('#track').is(':checked')
+				"attribute_checked": document.getElementById('track').checked
 			},
 			{	"attribute_id" : 5,
 				"attribute_name" : "Soccer Fields",
-				"attribute_checked": $('#soccer').is(':checked')
+				"attribute_checked": document.getElementById('soccer').checked
 			},
 			{	"attribute_id" : 6,
 				"attribute_name" : "Baseball Fields",
-				"attribute_checked": $('#baseball').is(':checked')
+				"attribute_checked": document.getElementById('baseball').checked
 			},
 			{	"attribute_id" : 7,
 				"attribute_name" : "Street Hockey Court",
-				"attribute_checked": $('#hockey').is(':checked')
+				"attribute_checked": document.getElementById('hockey').checked
 			},
 			{	"attribute_id" : 8,
 				"attribute_name" : "Pool",
-				"attribute_checked": $('#pool').is(':checked')
+				"attribute_checked": document.getElementById('pool').checked
 			},
 			{	"attribute_id" : 9,
 				"attribute_name" : "Baby Pool",
-				"attribute_checked": $('#babypool').is(':checked')
+				"attribute_checked": document.getElementById('babypool').checked
 			},
 			{	"attribute_id" : 10,
 				"attribute_name" : "Basketball Courts",
-				"attribute_checked": $('#basketball').is(':checked')
+				"attribute_checked": document.getElementById('basketball').checked
 			},
 			{	"attribute_id" : 11,
 				"attribute_name" : "Pavilions",
-				"attribute_checked": $('#paviolion').is(':checked')
+				"attribute_checked": document.getElementById('pavilion').checked
 			}
 		],
 		nearby : [
 			{ 
-				"name" : "Coffee",
-				"checked" : $('#coffee').is(':checked')
+				"attribute_id" : 12,
+				"attribute_name" : "Coffee",
+				"checked" : document.getElementById('coffee').checked
 			},
 			{ 
-				"name" : "Groceries",
-				"checked" : $('#groceries').is(':checked')
+				"attribute_id" : 13,
+				"attribute_name" : "Groceries",
+				"checked" : document.getElementById('groceries').checked
 			},
 			{ 
-				"name" : "Restaurants",
-				"checked" : $('#restaurants').is(':checked')
+				"attribute_id" : 14,
+				"attribute_name" : "Restaurants",
+				"checked" : document.getElementById('restaurants').checked
 			},
 			{ 
-				"name" : "Wireless",
-				"checked" : $('#wireless').is(':checked')
+				"attribute_id" : 15,
+				"attribute_name" : "Wireless",
+				"checked" : document.getElementById('wireless').checked
 			},
 			{ 
-				"name" : "Shopping",
-				"checked" : $('#shopping').is(':checked')
+				"attribute_id" : 16,
+				"attribute_name" : "Shopping",
+				"checked" : document.getElementById('shopping').checked
 			}
 		]
 	};
-	alert(obj.name);
 			// post to server to store information
-			$.post('php/newpark.php',{obj:JSON.stringify(obj)}, function(data){
-				alert(data);
-			
-			});
+	$.post('http://54.163.175.56/pgh/newpark.php',"obj=" + JSON.stringify(obj), function(data){
+			alert(data);	
+		});
 	 });
 
 

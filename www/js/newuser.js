@@ -12,11 +12,11 @@ $(document).ready(function() {
 			var name = $('#name').val();
 			
 			// if passwords match
-			if (pw.localeCompare(confirm) == 0) {
+			if (pw == confirm) {
 					// check if username already exists
-					$.post('php/pghnewuser.php', {username:username, email:email, name:name, pw:pw, confirm:confirm}, 
+					$.post('http://54.163.175.56/pgh/pghnewuser.php', {username:username, email:email, name:name, pw:pw, confirm:confirm}, 
 					function(data) {
-						if (data.localeCompare("exists") == 0) {
+						if (data == "exists") {
 								alert("username or email already exists, please re-enter");
 								$('#password').val("");
 								$('#confirm').val("");
@@ -25,7 +25,7 @@ $(document).ready(function() {
 								$('#name').val("");
 						}
 						else {
-							alert("returned data: " + data);
+							alert("Your account has been successfully created!");
 							window.location.href = 'index.html';
 						}
 					});
