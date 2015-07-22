@@ -88,3 +88,14 @@ function addMarker(feature, lat, lng) {
 		map: map
 	});
 }
+
+/**
+ *	function goToParkPage()
+ *
+ *	Jump to the park page of a user-specified park.
+ *	Param: name — the name of the park we want to search for
+ */
+function goToParkPage(name) {
+	localStorage['name'] = name;
+	window.location.href = 'viewpark.html';
+}

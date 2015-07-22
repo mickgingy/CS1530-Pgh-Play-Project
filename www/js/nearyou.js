@@ -124,7 +124,8 @@ function makeMap(lat, lng) {
 					/**
 						Mick, do the UI nonsense here with the info				
 					*/
-					$('#parkslist').append(response[i].park_name + " Park<br>");
+					//$('#parkslist').append(response[i].park_name + " Park<br>");
+					addToList(response[i].park_name);
 					//Other stuff you need to do
 				}
 			}
@@ -175,4 +176,35 @@ function addMarker(feature, lat, lng) {
 		position: new google.maps.LatLng(lat, lng),
 		map: map
 	});
+}
+
+/**
+ *	function addToList()
+ *
+ *	Add a park to the #TheList div.
+ *	Param: name — the name of the park or neighborhood to be added
+ */
+function addToList(name) {
+	var newDiv = document.createElement('div');
+	newDiv.className = 'listElement';
+	newDiv.innerHTML = name;
+	newDiv.onclick = (function () {
+		var parkname = name;
+		return function() {
+			goToParkPage(parkname);
+		}
+	});
+
+	$('#TheList').append(newDiv);
+}
+
+/**
+ *	function goToParkPage()
+ *
+ *	Jump to the park page of a user-specified park.
+ *	Param: name — the name of the park we want to search for
+ */
+function goToParkPage(name) {
+	localStorage['name'] = name;
+	window.location.href = 'viewpark.html';
 }
