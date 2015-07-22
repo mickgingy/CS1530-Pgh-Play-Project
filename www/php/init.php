@@ -13,7 +13,7 @@ $db->query("drop table parks");
 $db->query("drop table neighborhoods");  
 $db->query("drop table attributes");  
 $db->query("drop table comments");  
-$db->query("drop table Parkattributes");
+$db->query("drop table ParkAttributes");
   
 $result = $db->query("create table users (user_id int primary key not null AUTO_INCREMENT, email char(50) not null,  name char(20) not null, password char(255) not null, date char(20) not null)") or die ("Invalid: " . $db->error);
 
