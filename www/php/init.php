@@ -17,7 +17,7 @@ $db->query("drop table ParkAttributes");
   
 $result = $db->query("create table users (user_id int primary key not null AUTO_INCREMENT, email char(50) not null,  name char(20) not null, password char(255) not null, date char(20) not null)") or die ("Invalid: " . $db->error);
 
-$result = $db->query("create table parks (park_id int primary key not null AUTO_INCREMENT, name char(50) not null, address char(100) not null, zip_code int not null, gpslong decimal(8,5), gpslat decimal(8,5), neighborhood char(50), infants bool, toddlers bool, five bool, nine bool)") or die ("Invalid: " . $db->error);	
+$result = $db->query("create table parks (park_id int primary key not null AUTO_INCREMENT, name char(50) not null, address char(100) not null, zip_code int not null, gpslong decimal(8,5), gpslat decimal(8,5), neighborhood char(50), infants bool, toddlers bool, five bool, nine bool, universal bool)") or die ("Invalid: " . $db->error);	
 
 $result = $db->query("create table neighborhoods (neighborhood_id int primary key not null AUTO_INCREMENT, name char(50) not null, zip_code char(10) not null)") or die ("Invalid: " . $db->error);
 

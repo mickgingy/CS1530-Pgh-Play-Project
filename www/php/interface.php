@@ -438,11 +438,15 @@ function new_park(){
 		$nine_twelve_safe = $obj['nine_twelve_safe'];
 	else
 		$nine_twelve_safe = 0;
+	if(isset($obj['universal_safe'])){
+		$universal = $obj['universal_safe']);
+	else
+		$universal = 0;
 	
 	if(!isset($obj['neighborhood'])){
-		$result = $db->query("INSERT INTO parks (name, address, zip_code, infants, toddlers, five, nine, gpslong, gpslat) VALUES ('$name','$address','$zip','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe', $gpslong, $gpslat)") or trigger_error(mysql_error());
+		$result = $db->query("INSERT INTO parks (name, address, zip_code, infants, toddlers, five, nine, gpslong, gpslat, universal) VALUES ('$name','$address','$zip','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe', $gpslong, $gpslat, '$universal')") or trigger_error(mysql_error());
 	}else{
-		$result = $db->query("INSERT INTO parks (name, address, zip_code, neighborhood, infants, toddlers, five, nine, gpslong, gpslat) VALUES ('$name','$address','$zip','{$obj['neighborhood']}','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe', $gpslong, $gpslat)") or trigger_error(mysql_error());
+		$result = $db->query("INSERT INTO parks (name, address, zip_code, neighborhood, infants, toddlers, five, nine, gpslong, gpslat, universal) VALUES ('$name','$address','$zip','{$obj['neighborhood']}','$infant_safe','$toddler_safe','$five_eight_safe','$nine_twelve_safe', $gpslong, $gpslat, '$universal')") or trigger_error(mysql_error());
 	}
 	if(isset($obj['attributes'])){
 		foreach($obj['attributes'] as $attribute){
@@ -503,6 +507,7 @@ function get_park_info(){
 			$output['toddler_safe'] = $row['toddlers'];
 			$output['five_eight_safe'] = $row['five'];
 			$output['nine_twelve_safe'] = $row['nine'];
+			$output['universal_safe'] = $row['universal'];
 			$result = $db->query("SELECT AVERAGE(rating) as star, COUNT(rating) as num FROM comments WHERE park_id=$p_id");
 			$row = $result->fetch_array();
 			$output['rating'] = $row['star'];
