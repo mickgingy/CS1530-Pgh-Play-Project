@@ -107,8 +107,18 @@ function get_neighborhoods(){
 	global $delim_output;
 	connect();
 	
+	$result = $db->query("SELECT DISTINCT neighborhood FROM parks");
+	$i = 0;
+	$row = $result->fetch_array();
+	while($row != NULL){
+		$output[] = $row['neighborhood'];
+		$row = $result->fetch_array();
+	}
+	
+	echo json_encode($output);
+	return $output;
 	//Check if the zip parameter was sent
-	if(isset($_GET['zip'])){	//Make appropriate SQL Query.
+	/*if(isset($_GET['zip'])){	//Make appropriate SQL Query.
 		$query = "SELECT * FROM neighborhoods WHERE zip_code={$_GET['zip']}";
 	}else{
 		$query = "SELECT * FROM neighborhoods";
@@ -144,10 +154,7 @@ function get_neighborhoods(){
 	}else{
 		//Output using JSON
 		$output = json_encode($results);
-	}
-	
-	echo $output;
-	return $results;
+	}*/
 }
 
 /*
@@ -300,7 +307,7 @@ function get_parks_by_neighborhood(){
 	
 	//Check if the zip parameter was sent
 	if(isset($_GET['neighborhood'])){
-		$query = "SELECT * FROM parks WHERE neighborhood={$_GET['neighborhood']}";
+		$query = "SELECT * FROM parks WHERE neighborhood='{$_GET['neighborhood']}'";
 	}else{
 		die("{\"error\":\"Missing parameter: zip\"}");
 	}
@@ -438,8 +445,8 @@ function new_park(){
 		$nine_twelve_safe = $obj['nine_twelve_safe'];
 	else
 		$nine_twelve_safe = 0;
-	if(isset($obj['universal_safe'])){
-		$universal = $obj['universal_safe']);
+	if(isset($obj['universal_safe']))
+		$universal = $obj['universal_safe'];
 	else
 		$universal = 0;
 	
@@ -490,13 +497,13 @@ Returns:
 function get_park_info(){
 	global $db;
 	connect();
-	if(isset($_GET['park_id'])){
-		$p_id = $_GET['park_id'];
+	if(isset($_GET['name'])){
+		$p_name = $_GET['name'];
 		$output = array();
-		$result = $db->query("SELECT * FROM Parks WHERE park_id = $p_id");
+		$result = $db->query("SELECT * FROM Parks WHERE name = $p_name");
 		$row = $result->fetch_array();
 		if($row == NULL){
-			die("{\"error\":\"Invalid park_id\"}");
+			die("{\"error\":\"Invalid park name\"}");
 		}else{
 			$output['name'] = $row['name'];
 			$output['park_id'] = $row['park_id'];

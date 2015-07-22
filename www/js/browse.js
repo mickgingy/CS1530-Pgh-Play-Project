@@ -1,3 +1,6 @@
+//var park_data = [];
+//var neighborhoods = [];
+
 /**
  * 	function main()
  *
@@ -13,10 +16,27 @@ var main = function() {
 			// TODO: this is on you guys, since I really can't test the app without PhoneGap.
 			// Just call my addToList() function for every neighborhood and every park within
 			// each neighborhood, making sure to specify them accordingly. 
+			var response = JSON.parse(ajax.responseText);
+			var i;
+			for(i = 0; i < response.length; i++) {
+				// Add the neighborhood to the list
+				addToList(response[i], true);
+				
+				a = new XMLHttpRequest();
+				a.onreadystatechange = function() {
+					if (a.readyState == 4 && a.status == 200) {
+						var obj = JSON.parse(a.responseText);
+						// Add the park to the list
+						addToList(obj, false);
+					}
+				}
+				a.open("GET", "http://54.163.175.56/pgh/pghgetparksbyneighborhood.php?neighborhood=" + response[i], false);
+				a.send();
+			}
 		}
 	}
 	
-	ajax.open("GET", "http://54.163.175.56/pgh/pghgetneighborhoods.php", true);	
+	ajax.open("GET", "http://54.163.175.56/pgh/pghgetneighborhoods.php", true);
 	//ajax.open("GET", "php/pghgetneighborhoods.php");
 	ajax.send();
 };
@@ -24,9 +44,9 @@ var main = function() {
 $(document).ready(main);
 
 //For example:
-addToList("Oakland", true);
-addToList("Schenley Park", false);
-addToList("Random Playground", false);
+//addToList("Oakland", true);
+//addToList("Schenley Park", false);
+//addToList("Random Playground", false);
 
 /**
  *	function addToList()
