@@ -75,7 +75,7 @@ function addToList(name, isHood) {
 		newDiv.id = 'park';
 	}
 
-	$('#TheList').appendChild(newDiv);
+	$('#TheList').append(newDiv);
 }
 
 /**
