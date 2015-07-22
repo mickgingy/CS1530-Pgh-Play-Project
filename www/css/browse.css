@@ -1,6 +1,25 @@
-#the_list {
+#TheList {
 	height: 91%;
 	width: 100%;
 	overflow: hidden;
 	background-color: #0E6F48;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.listElement {
+	border: 1px solid #0E6F48;
+	color: white;
+	font-family: Karla;
+}
+
+#hood {
+	background-color: #5CB056;
+	width: 100%;
+}
+
+#park {
+	background-color: #85CF61;
+	width: 90%;
+	padding-left: 10%;
 }

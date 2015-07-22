@@ -1,6 +1,7 @@
 /**
- * function main()
+ * 	function main()
  *
+ *	Simple AJAX call function, gets all neighborhoods in the Database and all parks in each neighborhood
  */
 var main = function() {
 	//Send AJAX request for neighborhoods JSON object PHP script
@@ -9,15 +10,59 @@ var main = function() {
 		if (ajax.readyState == 4 && ajax.status == 200) {
 			var response = ajax.responseText;
 			alert(response);
-			//var hoods = JSON.parse(response);
-			//var hoods = JSON.parse(ajax.response);
+			// TODO: this is on you guys, since I really can't test the app without PhoneGap.
+			// Just call my addToList() function for every neighborhood and every park within
+			// each neighborhood, making sure to specify them accordingly. 
 		}
 	}
 	
-	ajax.open("GET", "http://54.163.175.56/php/pghgetneighborhoods.php", true);	
+	ajax.open("GET", "http://54.163.175.56/pgh/pghgetneighborhoods.php", true);	
+	//ajax.open("GET", "php/pghgetneighborhoods.php");
 	ajax.send();
 };
 
-// 
 $(document).ready(main);
 
+//For example:
+addToList("Oakland", true);
+addToList("Schenley Park", false);
+addToList("Random Playground", false);
+
+/**
+ *	function addToList()
+ *
+ *	Add a park to the #TheList div.
+ *	Param: name — the name of the park or neighborhood to be added
+ * 	Param: isHood — boolean: is the first parameter a neighborhood (true) or park (false)?
+ */
+function addToList(name, isHood) {
+	var newDiv = document.createElement('div');
+	newDiv.className = 'listElement';
+	newDiv.innerHTML = name;
+	newDiv.onclick = (function () {
+		var parkname = name;
+		return function() {
+			goToParkPage(parkname);
+		}
+	});
+	
+	if (isHood == true) {
+		newDiv.id = 'hood';
+	}
+	else {
+		newDiv.id = 'park';
+	}
+
+	$('#TheList').appendChild(newDiv);
+}
+
+/**
+ *	function goToParkPage()
+ *
+ *	Jump to the park page of a user-specified park.
+ *	Param: name — the name of the park we want to search for
+ */
+function goToParkPage(name) {
+	localStorage['name'] = name;
+	window.location.href = 'viewpark.html';
+}
