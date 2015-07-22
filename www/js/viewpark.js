@@ -62,8 +62,8 @@ function getParkInfo(name){
 			check.addClass = "fa fa-check";
 			
 			var r_div = document.createElement('div');
-			r_div.append(rp);
-			r_div.append(check);
+			r_div.appendChild(rp);
+			r_div.appendChild(check);
 			
 			if (park_info.infant_safe) {
 				var lp = document.createElement('p');

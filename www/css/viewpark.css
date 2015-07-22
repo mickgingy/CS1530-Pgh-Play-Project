@@ -11,24 +11,24 @@
 	height: 5%;
 	width: 100%;
 	color: white;
-	background-color: #85CF61;
+	background-color: #5CB056;
 	font-size: 150%;
 }
 
 #park_addr, #park_hood {
-	height: 10%;
 	width: 100%;
-	color: #85CF61;
+	color: #178553;
 	vertical-align: middle;
-	margin: 1%;
 }
 
 #park_addr {
 	background-color: #AFCF9F;
+	height: 7%
 }
 
 #park_hood {
-	background-color: #CADEC3;
+	background-color: #85cF62;
+	height: 5%
 }
 
 #pattributes {
@@ -41,7 +41,6 @@
 	margin-left: 1%;
 	width: 48.5%;
 	display: inline-block;
-	top: 0%;
 	float: left;
 }
 
