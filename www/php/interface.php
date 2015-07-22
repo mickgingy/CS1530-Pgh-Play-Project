@@ -16,7 +16,7 @@ function connect(){
 	global $db;
 	//Check to see if connection was already created prior in this webrequest.
 	if(!isset($db)){
-		$db = new mysqli('localhost', 'root', 'root', 'pghplay');
+		$db = new mysqli('localhost', 'root', '', 'pghplay');
 		if ($db->connect_error){
 			die ("Could not connect to db: " . $db->connect_error);
 		}
@@ -184,6 +184,8 @@ function get_parks(){
 		$r_row['park_address'] = $row['address'];
 		$r_row['zip_code'] = $row['zip_code'];
 		$r_row['neighborhood'] = $row['neighborhood'];
+		$r_row['gpslong'] = $row['gpslong'];
+		$r_row['gpslat'] = $row['gpslat'];
 		//Add it to the results
 		$results[] = $r_row;
 		$row = $result->fetch_array();
@@ -224,7 +226,7 @@ function get_parks_by_gps(){
 	global $db;
 	global $delim_output;
 	connect();
-	$zoom = new array(39.3216, 19.6608, 9.8304, 4.9152, 2.4576, 1.2288, .6144, .3072, .1536, .0768, .0384, .0192, .0096, .0048, .0024, .0012, .0006, .0003, .00015, .00007);
+	$zoom = array(39.3216, 19.6608, 9.8304, 4.9152, 2.4576, 1.2288, .6144, .3072, .1536, .0768, .0384, .0192, .0096, .0048, .0024, .0012, .0006, .0003, .00015, .00007);
 	//Check if the zip parameter was sent
 	if(isset($_GET['long']) && isset($_GET['lat']) && isset($_GET['zoom'])){
 		$zoom_dif = $zoom[$_GET['zoom']];
@@ -239,7 +241,7 @@ function get_parks_by_gps(){
 		$latbb = max($lata, $latb);
 		$query = "SELECT * FROM parks WHERE gpslong BETWEEN $longaa AND $longbb AND gpslat BETWEEN $lataa AND $latbb";
 	}else{
-		die("{\"error\":\"Missing parameter: zip\"}");
+		die("{\"error\":\"Missing parameter(s): long, lat, zoom\"}");
 	}
 	$result = $db->query($query);
 	$row = $result->fetch_array();
@@ -255,6 +257,8 @@ function get_parks_by_gps(){
 		$r_row['park_address'] = $row['address'];
 		$r_row['zip_code'] = $row['zip_code'];
 		$r_row['neighborhood'] = $row['neighborhood'];
+		$r_row['gpslong'] = $row['gpslong'];
+		$r_row['gpslat'] = $row['gpslat'];
 		//Add it to the results
 		$results[] = $r_row;
 		$row = $result->fetch_array();
@@ -314,6 +318,8 @@ function get_parks_by_neighborhood(){
 		$r_row['park_address'] = $row['address'];
 		$r_row['zip_code'] = $row['zip_code'];
 		$r_row['neighborhood'] = $row['neighborhood'];
+		$r_row['gpslong'] = $row['gpslong'];
+		$r_row['gpslat'] = $row['gpslat'];
 		//Add it to the results
 		$results[] = $r_row;
 		$row = $result->fetch_array();

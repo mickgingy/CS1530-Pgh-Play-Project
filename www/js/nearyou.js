@@ -1,6 +1,9 @@
 // On load, the browser window will load the Google Map div, starting by calling the initialize() function.
 google.maps.event.addDomListener(window, 'load', initialize);
-		
+			
+	var lat;
+	var lng;
+	
 /**
  *	function initialize()
  *
@@ -49,10 +52,7 @@ function getZip(zip) {
 	// Initialize a new Geocoder object, which lets us obtain latitude/longitude 
 	// values from an address or zip code.
 	var geocoder = new google.maps.Geocoder();
-	
-	var lat;
-	var lng;
-	
+
 	// Use the Maps geocode() function to obtain the location from the zip code
 	geocoder.geocode( { 'address': zip }, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
@@ -129,6 +129,24 @@ function makeMap(lat, lng) {
    	 *	Get AJAX return value from PHP DB — all nearby parks of user-inputted location.
    	 *	Then dynamically add each park to the #park_list ul.
    	 */
+	 
+	//Based on this TODO, I assume we make call here:
+	var httpRequest;
+	if (window.XMLHttpRequest) {
+		httpRequest = new XMLHttpRequest();
+		if (httpRequest.overrideMimeType) {
+			httpRequest.overrideMimeType('text/xml');
+		}
+	}
+	if (!httpRequest) {
+		alert('Cannot create an XMLHttpRequest instance');
+		return false;
+	}
+	var data = "long=" + lng + "&lat=" + lat + "zoom=" + map.getZoom() ;
+	httpRequest.open('POST', 'http://54.163.175.56/pgh/pghgetparksbygps.php', true);
+	httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	httpRequest.onreadystatechange = function() { processServerResponse(httpRequest); };
+	httpRequest.send(data);
 }
 
 /**
@@ -145,4 +163,21 @@ function addMarker(feature) {
 		// icon: icons[feature.type].icon (?)
 		map: map
 	});
+}
+
+
+
+function processServerResponse(httpRequest){
+	if(httpRequest.readyState == 4 && httpRequest.status == 200){
+		//Parse the response into a javascript object
+		var data = JSON.parse(httpRequest.responseText);
+		var i;
+		for(i = 0; i < data.length; i++){
+			//Place marker onto the screen
+			//addMarker(data[i].gpslong, data[i].gpslat);		
+			//Add the info into the list under the map
+			//$('#parkslist').append(data[i].park_name + "</br>" + data[i].park_address);
+			//Other stuff you need to do
+		}
+	}
 }
